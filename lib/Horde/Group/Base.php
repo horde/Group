@@ -1,25 +1,39 @@
 <?php
 /**
- * This class provides a mock driver for the Horde group system.
+ * Horde_Group_Base is the base class for all drivers of the Horde group
+ * system.
  *
- * Copyright 2008-2011 The Horde Project (http://www.horde.org/)
+ * Copyright 1999-2011 The Horde Project (http://www.horde.org/)
  *
  * See the enclosed file COPYING for license information (LGPL). If you
  * did not receive this file, see http://www.fsf.org/copyleft/lgpl.html.
  *
- * @author   Duck <duck@obala.net>
+ * @author   Jan Schneider <jan@horde.org>
  * @category Horde
  * @license  http://www.fsf.org/copyleft/lgpl.html LGPL
  * @package  Group
  */
-class Horde_Group_Mock extends Horde_Group_Base
+abstract class Horde_Group_Base
 {
     /**
-     * List of groups.
+     * Returns whether the group backend is read-only.
      *
-     * @var array
+     * @return boolean
      */
-    protected $_groups;
+    public function readOnly()
+    {
+        return true;
+    }
+
+    /**
+     * Returns whether groups can be renamed.
+     *
+     * @return boolean
+     */
+    public function renameSupported()
+    {
+        return true;
+    }
 
     /**
      * Creates a new group.
@@ -32,11 +46,7 @@ class Horde_Group_Mock extends Horde_Group_Base
      */
     public function create($name, $email = null)
     {
-        $id = 'group_' . count($this->_groups);
-        $this->_groups[$id] = array('name'  => $name,
-                                    'email' => $email,
-                                    'users' => array());
-        return $id;
+        throw new Horde_Group_Exception('This group backend is read-only.');
     }
 
     /**
@@ -46,13 +56,11 @@ class Horde_Group_Mock extends Horde_Group_Base
      * @param string $name  The new name.
      *
      * @throws Horde_Group_Exception
+     * @throws Horde_Exception_NotFound
      */
     public function rename($gid, $name)
     {
-        if (!isset($this->_groups[$gid])) {
-            throw new Horde_Exception_NotFound('Group "' . $gid . '" not found');
-        }
-        $this->_groups[$gid]['name'] = $name;
+        throw new Horde_Group_Exception('This group backend is read-only.');
     }
 
     /**
@@ -64,7 +72,7 @@ class Horde_Group_Mock extends Horde_Group_Base
      */
     public function remove($gid)
     {
-        unset($this->_groups[$gid]);
+        throw new Horde_Group_Exception('This group backend is read-only.');
     }
 
     /**
@@ -75,10 +83,7 @@ class Horde_Group_Mock extends Horde_Group_Base
      * @return boolean  True if the group exists.
      * @throws Horde_Group_Exception
      */
-    public function exists($gid)
-    {
-        return isset($this->_groups[$gid]);
-    }
+    abstract public function exists($gid);
 
     /**
      * Returns a group name.
@@ -87,14 +92,9 @@ class Horde_Group_Mock extends Horde_Group_Base
      *
      * @return string  The group's name.
      * @throws Horde_Group_Exception
+     * @throws Horde_Exception_NotFound
      */
-    public function getName($gid)
-    {
-        if (!isset($this->_groups[$gid])) {
-            throw new Horde_Exception_NotFound('Group ' . $gid . ' not found');
-        }
-        return $this->_groups[$gid]['name'];
-    }
+    abstract public function getName($gid);
 
     /**
      * Returns all available attributes of a group.
@@ -105,13 +105,7 @@ class Horde_Group_Mock extends Horde_Group_Base
      * @throws Horde_Group_Exception
      * @throws Horde_Exception_NotFound
      */
-    public function getData($gid)
-    {
-        if (!isset($this->_groups[$gid])) {
-            throw new Horde_Exception_NotFound('Group ' . $gid . ' not found');
-        }
-        return $this->_groups[$gid];
-    }
+    abstract public function getData($gid);
 
     /**
      * Sets one or more attributes of a group.
@@ -127,14 +121,7 @@ class Horde_Group_Mock extends Horde_Group_Base
      */
     public function setData($gid, $attribute, $value = null)
     {
-        if (!isset($this->_groups[$gid])) {
-            throw new Horde_Exception_NotFound('Group ' . $gid . ' not found');
-        }
-        if (is_array($attribute)) {
-            $this->_groups[$gid] = array_merge($this->_groups[$gid], $attribute);
-        } else {
-            $this->_groups[$gid][$attribute] = $value;
-        }
+        throw new Horde_Group_Exception('This group backend is read-only.');
     }
 
     /**
@@ -143,15 +130,7 @@ class Horde_Group_Mock extends Horde_Group_Base
      * @return array  All existing groups.
      * @throws Horde_Group_Exception
      */
-    public function listAll()
-    {
-        $groups = array();
-        foreach ($this->_groups as $gid => $group) {
-            $groups[$gid] = $group['name'];
-        }
-        asort($groups);
-        return $groups;
-    }
+    abstract public function listAll();
 
     /**
      * Returns a list of users in a group.
@@ -160,14 +139,9 @@ class Horde_Group_Mock extends Horde_Group_Base
      *
      * @return array  List of group users.
      * @throws Horde_Group_Exception
+     * @throws Horde_Exception_NotFound
      */
-    public function listUsers($gid)
-    {
-        if (!isset($this->_groups[$gid])) {
-            throw new Horde_Exception_NotFound('Group ' . $gid . ' not found');
-        }
-        return $this->_groups[$gid]['users'];
-    }
+    abstract public function listUsers($gid);
 
     /**
      * Returns a list of groups a user belongs to.
@@ -177,17 +151,7 @@ class Horde_Group_Mock extends Horde_Group_Base
      * @return array  A list of groups, with IDs as keys and names as values.
      * @throws Horde_Group_Exception
      */
-    public function listGroups($user)
-    {
-        $groups = array();
-        foreach ($this->_groups as $gid => $group) {
-            if (in_array($user, $group['users'])) {
-                $groups[$gid] = $group['name'];
-            }
-        }
-        asort($groups);
-        return $groups;
-    }
+    abstract public function listGroups($user);
 
     /**
      * Add a user to a group.
@@ -196,13 +160,11 @@ class Horde_Group_Mock extends Horde_Group_Base
      * @param string $user  A user name.
      *
      * @throws Horde_Group_Exception
+     * @throws Horde_Exception_NotFound
      */
     public function addUser($gid, $user)
     {
-        if (!isset($this->_groups[$gid])) {
-            throw new Horde_Exception_NotFound('Group ' . $gid . ' not found');
-        }
-        $this->_groups[$gid]['users'][] = $user;
+        throw new Horde_Group_Exception('This group backend is read-only.');
     }
 
     /**
@@ -212,16 +174,11 @@ class Horde_Group_Mock extends Horde_Group_Base
      * @param string $user  A user name.
      *
      * @throws Horde_Group_Exception
+     * @throws Horde_Exception_NotFound
      */
     public function removeUser($gid, $user)
     {
-        if (!isset($this->_groups[$gid])) {
-            throw new Horde_Exception_NotFound('Group ' . $gid . ' not found');
-        }
-        $key = array_search($user, $this->_groups[$gid]['users']);
-        if ($key !== false) {
-            unset($this->_groups[$gid]['users'][$key]);
-        }
+        throw new Horde_Group_Exception('This group backend is read-only.');
     }
 
     /**
@@ -233,15 +190,5 @@ class Horde_Group_Mock extends Horde_Group_Base
      *                values.
      * @throws Horde_Group_Exception
      */
-    public function search($name)
-    {
-        $groups = array();
-        foreach ($this->_groups as $gid => $group) {
-            if (strpos($group['name'], $name) !== false) {
-                $groups[$gid] = $group['name'];
-            }
-        }
-        asort($groups);
-        return $groups;
-    }
+    abstract public function search($name);
 }
