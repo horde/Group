@@ -17,7 +17,7 @@
   <email>chuck@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2016-03-21</date>
+ <date>2017-10-17</date>
  <version>
   <release>2.1.2</release>
   <api>1.1.0</api>
@@ -39,7 +39,6 @@
        <file name="group.ldif" role="doc" />
        <file name="group.schema" role="doc" />
       </dir> <!-- /doc/Horde/Group/ldap -->
-      <file name="COPYING" role="doc" />
       <file name="UPGRADING" role="doc" />
      </dir> <!-- /doc/Horde/Group -->
     </dir> <!-- /doc/Horde -->
@@ -64,7 +63,7 @@
       <file name="3_horde_group_upgrade_null_parents.php" role="data" />
      </dir> <!-- /migration/Horde/Group -->
     </dir> <!-- /migration/Horde -->
-    </dir> <!-- /migration -->
+   </dir> <!-- /migration -->
    <dir name="test">
     <dir name="Horde">
      <dir name="Group">
@@ -92,6 +91,7 @@
      </dir> <!-- /test/Horde/Group -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
+   <file name="LICENSE" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -159,16 +159,16 @@
  </dependencies>
  <phprelease>
   <filelist>
-   <install as="COPYING" name="doc/Horde/Group/COPYING" />
-   <install as="UPGRADING" name="doc/Horde/Group/UPGRADING" />
    <install as="ldap/group.ldif" name="doc/Horde/Group/ldap/group.ldif" />
    <install as="ldap/group.schema" name="doc/Horde/Group/ldap/group.schema" />
+   <install as="UPGRADING" name="doc/Horde/Group/UPGRADING" />
    <install as="Horde/Group/Base.php" name="lib/Horde/Group/Base.php" />
    <install as="Horde/Group/Exception.php" name="lib/Horde/Group/Exception.php" />
    <install as="Horde/Group/Kolab.php" name="lib/Horde/Group/Kolab.php" />
    <install as="Horde/Group/Ldap.php" name="lib/Horde/Group/Ldap.php" />
    <install as="Horde/Group/Mock.php" name="lib/Horde/Group/Mock.php" />
    <install as="Horde/Group/Sql.php" name="lib/Horde/Group/Sql.php" />
+   <install as="LICENSE" name="LICENSE" />
    <install as="migration/1_horde_group_base_tables.php" name="migration/Horde/Group/1_horde_group_base_tables.php" />
    <install as="migration/2_horde_group_upgrade_autoincrement.php" name="migration/Horde/Group/2_horde_group_upgrade_autoincrement.php" />
    <install as="migration/3_horde_group_upgrade_null_parents.php" name="migration/Horde/Group/3_horde_group_upgrade_null_parents.php" />
@@ -178,7 +178,6 @@
    <install as="Horde/Group/LdapTest.php" name="test/Horde/Group/LdapTest.php" />
    <install as="Horde/Group/MockTest.php" name="test/Horde/Group/MockTest.php" />
    <install as="Horde/Group/phpunit.xml" name="test/Horde/Group/phpunit.xml" />
-   <install as="Horde/Group/TestBase.php" name="test/Horde/Group/TestBase.php" />
    <install as="Horde/Group/Sql/Base.php" name="test/Horde/Group/Sql/Base.php" />
    <install as="Horde/Group/Sql/MysqliTest.php" name="test/Horde/Group/Sql/MysqliTest.php" />
    <install as="Horde/Group/Sql/MysqlTest.php" name="test/Horde/Group/Sql/MysqlTest.php" />
@@ -187,6 +186,7 @@
    <install as="Horde/Group/Sql/Pdo/PgsqlTest.php" name="test/Horde/Group/Sql/Pdo/PgsqlTest.php" />
    <install as="Horde/Group/Sql/Pdo/SqliteTest.php" name="test/Horde/Group/Sql/Pdo/SqliteTest.php" />
    <install as="Horde/Group/Stub/Api.php" name="test/Horde/Group/Stub/Api.php" />
+   <install as="Horde/Group/TestBase.php" name="test/Horde/Group/TestBase.php" />
   </filelist>
  </phprelease>
  <changelog>
@@ -533,7 +533,7 @@ Initial release as a PEAR package
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2016-03-21</date>
+   <date>2017-10-17</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
