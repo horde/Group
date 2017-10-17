@@ -39,7 +39,7 @@
        <file name="group.ldif" role="doc" />
        <file name="group.schema" role="doc" />
       </dir> <!-- /doc/Horde/Group/ldap -->
-      <file name="UPGRADING" role="doc" />
+      <file name="UPGRADING.rst" role="doc" />
      </dir> <!-- /doc/Horde/Group -->
     </dir> <!-- /doc/Horde -->
    </dir> <!-- /doc -->
@@ -161,7 +161,7 @@
   <filelist>
    <install as="ldap/group.ldif" name="doc/Horde/Group/ldap/group.ldif" />
    <install as="ldap/group.schema" name="doc/Horde/Group/ldap/group.schema" />
-   <install as="UPGRADING" name="doc/Horde/Group/UPGRADING" />
+   <install as="UPGRADING.rst" name="doc/Horde/Group/UPGRADING.rst" />
    <install as="Horde/Group/Base.php" name="lib/Horde/Group/Base.php" />
    <install as="Horde/Group/Exception.php" name="lib/Horde/Group/Exception.php" />
    <install as="Horde/Group/Kolab.php" name="lib/Horde/Group/Kolab.php" />
