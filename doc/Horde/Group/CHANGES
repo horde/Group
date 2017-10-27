@@ -1,0 +1,189 @@
+----------
+v2.1.2-git
+----------
+
+
+------
+v2.1.1
+------
+
+[jan] Mark PHP 7 as supported.
+
+
+------
+v2.1.0
+------
+
+[jan] Add caching support.
+
+
+------
+v2.0.5
+------
+
+[jan] Add schema definition for LDAP groups.
+[jan] Don't throw exception from listUsers() if group not found in LDAP
+      directory (Bug #13879).
+
+
+------
+v2.0.4
+------
+
+[jan] Check for read-only LDAP configurations in removeUser()
+      (skhorde@smail.inf.fh-bonn-rhein-sieg.de, Bug #13247).
+
+
+------
+v2.0.3
+------
+
+[jan] Make SQL backend compatible with Oracle.
+
+
+------
+v2.0.2
+------
+
+[jan] Improve unit tests.
+
+
+------
+v2.0.1
+------
+
+[mms] Use new Horde_Test layout.
+
+
+------
+v2.0.0
+------
+
+First stable release for Horde 5.
+
+
+-----------
+v2.0.0beta1
+-----------
+
+First beta release for Horde 5.
+
+
+------------
+v2.0.0alpha1
+------------
+
+First alpha release for Horde 5.
+[mms] Remove Contactlists driver.
+
+
+------
+v1.0.5
+------
+
+[jan] Use configured filter when listing groups (Jesse Sandberg
+      <jesse.sandberg@verkkokauppa.com>, Bug #10975).
+
+
+------
+v1.0.4
+------
+
+[jan] Allow to run unit tests from installed package.
+
+
+------
+v1.0.3
+------
+
+[jan] Fix bind for modifying existing LDAP groups.
+
+
+------
+v1.0.2
+------
+
+[jan] Fix undefined method when using attrisdn in LDAP driver.
+
+
+------
+v1.0.1
+------
+
+[jan] Add support for the attrisdn configuration setting (Bug #9762).
+
+
+------
+v1.0.0
+------
+
+First stable release for Horde 4.
+[jan] Add parameter to listAll() to only return groups that a user is member
+      of.
+
+
+---------
+v1.0.0RC2
+---------
+
+Second release candidate for Horde 4.
+[jan] Fix incorrect lowercasing of objectClasses in LDAP driver.
+[jan] Fix building LDAP filter from configuration (Bug #9739).
+
+
+---------
+v1.0.0RC1
+---------
+
+First release candidate for Horde 4.
+
+
+-----------
+v1.0.0beta1
+-----------
+
+Fix error in Mock driver when listing groups (Bug #9642).
+
+
+------------
+v1.0.0alpha1
+------------
+
+First alpha release for Horde 4.
+Throw exceptions, not PEAR_Errors.
+
+
+------
+v0.1.0
+------
+
+Added a mock driver for installations that don't need groups (Request #6157).
+Added a beta SQL Group driver (Request #6175).
+Removed unused renameGroup() function.
+Fixed loading subclasses before unserializing session objects (Bug #4650)
+Added caching.
+Fixed getGroupParents().
+Fixed listAllUsers().
+Switched from hook functions for every group to a single hook function for all
+      groups (Request #4324).
+Added a Group driver for the Kolab groupware server.
+Allow group members to be stored as DNs in LDAP driver (Bug #4131).
+Significant changes to the LDAP Group driver (Bug #4135).
+Fixed chicken and egg problem for creating the first LDAP group (Bug #4668).
+Fixed nextgid calculation in the LDAP driver (Bug #4699).
+UTF-8-encoded DNs in the LDAP Groups driver (Bugs #4692 and #4918).
+
+
+------
+v0.0.2
+------
+
+Added ldap driver.
+Converted to package.xml 2.0 for pear.horde.org.
+
+
+------
+v0.0.1
+------
+
+Initial release as a PEAR package
