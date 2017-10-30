@@ -17,7 +17,7 @@
   <email>chuck@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2016-03-21</date>
+ <date>2017-10-30</date>
  <version>
   <release>2.1.2</release>
   <api>1.1.0</api>
@@ -39,6 +39,7 @@
        <file name="group.ldif" role="doc" />
        <file name="group.schema" role="doc" />
       </dir> <!-- /doc/Horde/Group/ldap -->
+      <file name="CHANGES" role="doc" />
       <file name="COPYING" role="doc" />
       <file name="UPGRADING" role="doc" />
      </dir> <!-- /doc/Horde/Group -->
@@ -159,6 +160,7 @@
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="CHANGES" name="doc/Horde/Group/CHANGES" />
    <install as="COPYING" name="doc/Horde/Group/COPYING" />
    <install as="UPGRADING" name="doc/Horde/Group/UPGRADING" />
    <install as="ldap/group.ldif" name="doc/Horde/Group/ldap/group.ldif" />
@@ -533,7 +535,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2016-03-21</date>
+   <date>2017-10-30</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
