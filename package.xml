@@ -3,7 +3,7 @@
  <name>Horde_Group</name>
  <channel>pear.horde.org</channel>
  <extends>Group</extends>
- <summary>Horde User Groups System</summary>
+ <summary>User groups library</summary>
  <description>Package for managing and accessing the Horde groups system.</description>
  <lead>
   <name>Jan Schneider</name>
@@ -17,7 +17,7 @@
   <email>chuck@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-27</date>
+ <date>2017-11-11</date>
  <version>
   <release>2.1.2</release>
   <api>1.1.0</api>
@@ -533,7 +533,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-27</date>
+   <date>2017-11-11</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
