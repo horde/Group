@@ -88,7 +88,6 @@
       <file name="conf.php.dist" role="test" />
       <file name="LdapTest.php" role="test" />
       <file name="MockTest.php" role="test" />
-      <file name="phpunit.xml" role="test" />
       <file name="TestBase.php" role="test" />
      </dir> <!-- /test/Horde/Group -->
     </dir> <!-- /test/Horde -->
@@ -179,7 +178,6 @@
    <install as="Horde/Group/conf.php.dist" name="test/Horde/Group/conf.php.dist" />
    <install as="Horde/Group/LdapTest.php" name="test/Horde/Group/LdapTest.php" />
    <install as="Horde/Group/MockTest.php" name="test/Horde/Group/MockTest.php" />
-   <install as="Horde/Group/phpunit.xml" name="test/Horde/Group/phpunit.xml" />
    <install as="Horde/Group/TestBase.php" name="test/Horde/Group/TestBase.php" />
    <install as="Horde/Group/Sql/Base.php" name="test/Horde/Group/Sql/Base.php" />
    <install as="Horde/Group/Sql/MysqliTest.php" name="test/Horde/Group/Sql/MysqliTest.php" />
