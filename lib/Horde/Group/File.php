@@ -52,19 +52,10 @@ class Horde_Group_File extends Horde_Group_Base
      */
     public function __construct($params)
     {
-        /* disable caching for now, otherwise we would need to
-           monitor mtime changes on the input file and build our
-           cache signature in _sig() including the mtime.
-           Caching might even be more overhead for this lightweight backend.
-        */
-        if (isset($params['cache'])) {
-            $params['cache'] = new Horde_Support_Stub();
-        }
-
-        $use_gid = false;
-        if (isset($params['use_gid'])) {
-            $use_gid = $params['use_gid'];
-        }
+        $params = array_merge(
+            array('use_gid' => false),
+            $params
+        );
 
         parent::__construct($params);
 
@@ -83,7 +74,7 @@ class Horde_Group_File extends Horde_Group_Base
             }
 
             // either use gid from file or group name as id
-            $id = $use_gid ? $m[2] : $m[1];
+            $id = $params['use_gid'] ? $m[2] : $m[1];
             $this->_groups[$id] = array(
                 'name' => $m[1],
                 'users' => explode(',', $m[3])
