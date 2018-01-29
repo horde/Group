@@ -66,14 +66,14 @@ class Horde_Group_FileTest extends Horde_Group_TestBase
     {
         $filename = Horde::getTempFile('Horde_Group_FileTest');
 
-        $group_name = "Group with Umläut";
-        $user_name = "joe";
+        $group_name = 'Group with Umläut';
+        $user_name = 'joe';
 
-        $fp = fopen($filename, "w");
-        fprintf($fp, "$group_name:x:1:$user_name\n");
+        $fp = fopen($filename, 'w');
+        fwrite($fp, "$group_name:x:1:$user_name\n");
         fclose($fp);
 
-        $params = array("filename" => $filename);
+        $params = array('filename' => $filename);
         $group = new Horde_Group_File($params);
 
         $this->assertTrue($group->exists($group_name));
@@ -83,7 +83,7 @@ class Horde_Group_FileTest extends Horde_Group_TestBase
 
     public function testGidFromFile()
     {
-        $params = array("filename" => self::$_groupfile, "use_gid" => true);
+        $params = array('filename' => self::$_groupfile, 'use_gid' => true);
         self::$group = new Horde_Group_File($params);
         self::$groupids = array(1, 2, 3);
 
@@ -92,17 +92,17 @@ class Horde_Group_FileTest extends Horde_Group_TestBase
         $this->assertTrue(self::$group->exists(self::$groupids[2]));
         $this->assertFalse(self::$group->exists(4242424));
 
-        $this->assertEquals("My Other Group", self::$group->getName(self::$groupids[1]));
+        $this->assertEquals('My Other Group', self::$group->getName(self::$groupids[1]));
     }
 
     public static function setUpBeforeClass()
     {
         self::$_groupfile = Horde::getTempFile('Horde_Group_FileTest');
 
-        $fp = fopen(self::$_groupfile, "w");
-        fprintf($fp, "My Group:x:1:joe\n");
-        fprintf($fp, "My Other Group:x:2:joe,jane\n");
-        fprintf($fp, "Not My Group:x:3:jeff,steve\n");
+        $fp = fopen(self::$_groupfile, 'w');
+        fwrite($fp, "My Group:x:1:joe\n");
+        fwrite($fp, "My Other Group:x:2:joe,jane\n");
+        fwrite($fp, "Not My Group:x:3:jeff,steve\n");
         fclose($fp);
 
         self::$group = new Horde_Group_File(array('filename' => self::$_groupfile));
