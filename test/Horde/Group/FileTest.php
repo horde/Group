@@ -97,7 +97,7 @@ class Horde_Group_FileTest extends Horde_Group_TestBase
 
     public static function setUpBeforeClass()
     {
-        self::$_groupfile = Horde::getTempFile('Horde_Group_FileTest');
+        self::$_groupfile = Horde_Util::getTempFile('Horde_Group_FileTest');
 
         $fp = fopen(self::$_groupfile, 'w');
         fwrite($fp, "My Group:x:1:joe\n");
