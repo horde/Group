@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 1999-2016 Horde LLC (http://www.horde.org/)
+ * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file COPYING for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -13,15 +13,18 @@
  */
 
 /**
- * The Horde_Group_File class provides an implementation of the Horde
- * group system for integration with /etc/group or a custom group file.
+ * The Horde_Group_File class provides an implementation of the Horde group
+ * system for integration with /etc/group or a custom group file.
  *
  * File format is:
+ * <pre>
  * group_name:encrypted_passwd:GID:user_list
+ * </pre>
  *
  * encrypted_passwd is 'x' if shadow is used, user_list is comma separated
  * Note: the gid is normally the group name. See 'use_gid' parameter.
  *
+ * @since    Horde_Group 2.2.0
  * @author   Jan Schneider <jan@horde.org>
  * @author   Thomas Jarosch <thomas.jarosch@intra2net.com>
  * @category Horde
@@ -39,6 +42,13 @@ class Horde_Group_File extends Horde_Group_Base
 
     /**
      * Constructor.
+     *
+     * @param array $params  Driver parameters:
+     *                       - 'filename': Path to the groups file.
+     *                       - 'use_gid': (boolean) Use GID instead of the
+     *                                    group name as the ID.
+     *
+     * @throws Horde_Group_Exception
      */
     public function __construct($params)
     {
@@ -88,7 +98,6 @@ class Horde_Group_File extends Horde_Group_Base
      * @param mixed $gid  A group ID.
      *
      * @return boolean  True if the group exists.
-     * @throws Horde_Group_Exception
      */
     protected function _exists($gid)
     {
@@ -101,7 +110,6 @@ class Horde_Group_File extends Horde_Group_Base
      * @param mixed $gid  A group ID.
      *
      * @return string  The group's name.
-     * @throws Horde_Group_Exception
      * @throws Horde_Exception_NotFound
      */
     protected function _getName($gid)
@@ -118,7 +126,6 @@ class Horde_Group_File extends Horde_Group_Base
      * @param mixed $gid  A group ID.
      *
      * @return array  The group's date.
-     * @throws Horde_Group_Exception
      * @throws Horde_Exception_NotFound
      */
     protected function _getData($gid)
@@ -135,7 +142,6 @@ class Horde_Group_File extends Horde_Group_Base
      * as values.
      *
      * @return array  All existing groups.
-     * @throws Horde_Group_Exception
      */
     protected function _listAll()
     {
@@ -152,7 +158,6 @@ class Horde_Group_File extends Horde_Group_Base
      * @param mixed $gid  A group ID.
      *
      * @return array  List of group users.
-     * @throws Horde_Group_Exception
      * @throws Horde_Exception_NotFound
      */
     protected function _listUsers($gid)
@@ -169,7 +174,6 @@ class Horde_Group_File extends Horde_Group_Base
      * @param string $user  A user name.
      *
      * @return array  A list of groups, with IDs as keys and names as values.
-     * @throws Horde_Group_Exception
      */
     protected function _listGroups($user)
     {
@@ -189,7 +193,6 @@ class Horde_Group_File extends Horde_Group_Base
      *
      * @return array  A list of matching groups, with IDs as keys and names as
      *                values.
-     * @throws Horde_Group_Exception
      */
     protected function _search($name)
     {
