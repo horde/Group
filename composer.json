@@ -1,8 +1,8 @@
 {
     "name": "horde/group",
-    "description": "Horde User Groups System",
+    "description": "User groups library",
     "type": "library",
-    "homepage": "https://pear.horde.org",
+    "homepage": "https://www.horde.org/libraries/Horde_Group",
     "license": "LGPL-2.1",
     "authors": [
         {
@@ -16,8 +16,8 @@
             "role": "lead"
         }
     ],
-    "version": "2.1.2",
-    "time": "2017-10-20",
+    "version": "2.2.0",
+    "time": "2018-01-29",
     "repositories": [
         {
             "type": "pear",

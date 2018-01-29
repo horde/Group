@@ -3,7 +3,7 @@
  <name>Horde_Group</name>
  <channel>pear.horde.org</channel>
  <extends>Group</extends>
- <summary>Horde User Groups System</summary>
+ <summary>User groups library</summary>
  <description>Package for managing and accessing the Horde groups system.</description>
  <lead>
   <name>Jan Schneider</name>
@@ -17,10 +17,10 @@
   <email>chuck@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-27</date>
+ <date>2018-01-29</date>
  <version>
-  <release>2.1.2</release>
-  <api>1.1.0</api>
+  <release>2.2.0</release>
+  <api>1.2.0</api>
  </version>
  <stability>
   <release>stable</release>
@@ -49,6 +49,7 @@
      <dir name="Group">
       <file name="Base.php" role="php" />
       <file name="Exception.php" role="php" />
+      <file name="File.php" role="php" />
       <file name="Kolab.php" role="php" />
       <file name="Ldap.php" role="php" />
       <file name="Mock.php" role="php" />
@@ -85,6 +86,7 @@
       <file name="AllTests.php" role="test" />
       <file name="bootstrap.php" role="test" />
       <file name="conf.php.dist" role="test" />
+      <file name="FileTest.php" role="test" />
       <file name="LdapTest.php" role="test" />
       <file name="MockTest.php" role="test" />
       <file name="TestBase.php" role="test" />
@@ -165,6 +167,7 @@
    <install as="UPGRADING.rst" name="doc/Horde/Group/UPGRADING.rst" />
    <install as="Horde/Group/Base.php" name="lib/Horde/Group/Base.php" />
    <install as="Horde/Group/Exception.php" name="lib/Horde/Group/Exception.php" />
+   <install as="Horde/Group/File.php" name="lib/Horde/Group/File.php" />
    <install as="Horde/Group/Kolab.php" name="lib/Horde/Group/Kolab.php" />
    <install as="Horde/Group/Ldap.php" name="lib/Horde/Group/Ldap.php" />
    <install as="Horde/Group/Mock.php" name="lib/Horde/Group/Mock.php" />
@@ -176,6 +179,7 @@
    <install as="Horde/Group/AllTests.php" name="test/Horde/Group/AllTests.php" />
    <install as="Horde/Group/bootstrap.php" name="test/Horde/Group/bootstrap.php" />
    <install as="Horde/Group/conf.php.dist" name="test/Horde/Group/conf.php.dist" />
+   <install as="Horde/Group/FileTest.php" name="test/Horde/Group/FileTest.php" />
    <install as="Horde/Group/LdapTest.php" name="test/Horde/Group/LdapTest.php" />
    <install as="Horde/Group/MockTest.php" name="test/Horde/Group/MockTest.php" />
    <install as="Horde/Group/Sql/Base.php" name="test/Horde/Group/Sql/Base.php" />
@@ -528,12 +532,12 @@
   </release>
   <release>
    <version>
-    <release>2.1.2</release>
-    <api>1.1.0</api></version>
+    <release>2.2.0</release>
+    <api>1.2.0</api></version>
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-27</date>
+   <date>2018-01-29</date>
    <license uri="http://www.horde.org/licenses/lgpl21">LGPL-2.1</license>
    <notes>
 * 
