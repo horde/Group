@@ -105,18 +105,13 @@ class Horde_Group_FileTest extends Horde_Group_TestBase
         fprintf($fp, "Not My Group:x:3:jeff,steve\n");
         fclose($fp);
 
-        self::$groupids = array("My Group", "My Other Group", "Not My Group");
-    }
-
-    public function setUp()
-    {
-        $params = array("filename" => self::$_groupfile);
-        self::$group = new Horde_Group_File($params);
-        self::$groupids = array("My Group", "My Other Group", "Not My Group");
+        self::$group = new Horde_Group_File(array('filename' => self::$_groupfile));
+        self::$groupids = array('My Group', 'My Other Group', 'Not My Group');
     }
 
     public static function tearDownAfterClass()
     {
         unlink(self::$_groupfile);
+        parent::tearDownAfterClass();
     }
 }
