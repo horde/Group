@@ -64,7 +64,7 @@ class Horde_Group_FileTest extends Horde_Group_TestBase
 
     public function testGroupWithUmlaut()
     {
-        $filename = Horde::getTempFile('Horde_Group_FileTest');
+        $filename = Horde_Util::getTempFile('Horde_Group_FileTest');
 
         $group_name = 'Group with Umläut';
         $user_name = 'joe';
