@@ -1,6 +1,6 @@
-------
-v2.2.0
-------
+------------
+v3.0.0alpha1
+------------
 
 [jan] Add read-only File driver for (shadow) group file backends.
 
