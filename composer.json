@@ -40,9 +40,6 @@
     "autoload": {
         "psr-0": {
             "Horde_Group": "lib/"
-        },
-        "psr-4": {
-            "Horde\\Group\\": "src/"
         }
     }
 }
