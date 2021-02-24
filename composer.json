@@ -26,16 +26,16 @@
     ],
     "require": {
         "horde/horde-installer-plugin": "*",
-        "php": "^5.3 || ^7",
-        "horde/exception": "^2",
-        "horde/util": "^2",
-        "horde/support": "^2"
+        "php": "^7",
+        "horde/exception": "^3",
+        "horde/util": "^3",
+        "horde/support": "^3"
     },
     "suggest": {
-        "horde/cache": "^2",
-        "horde/db": "^2",
-        "horde/ldap": "^2",
-        "horde/test": "^2.1"
+        "horde/cache": "^3",
+        "horde/db": "^3",
+        "horde/ldap": "^3",
+        "horde/test": "^3"
     },
     "autoload": {
         "psr-0": {
