@@ -2,6 +2,9 @@
 /**
  * Prepare the test setup.
  */
+namespace Horde\Group\Sql;
+use Horde_Group_Test_Sql_Base as Base;
+
 require_once __DIR__ . '/Base.php';
 
 /**
@@ -13,9 +16,9 @@ require_once __DIR__ . '/Base.php';
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Group_Sql_Oci8Test extends Horde_Group_Test_Sql_Base
+class Oci8Test extends Base
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         if (!extension_loaded('oci8')) {
             self::$reason = 'No oci8 extension';

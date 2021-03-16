@@ -8,7 +8,12 @@
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Group_MockTest extends Horde_Group_TestBase
+namespace Horde\Group;
+use Horde_Group_TestBase as TestBase;
+use \Horde_Util;
+use \Horde_Group_Mock;
+
+class MockTest extends TestBase
 {
     public function testListAllWithNoGroupsCreated()
     {
@@ -254,7 +259,7 @@ class Horde_Group_MockTest extends Horde_Group_TestBase
         $this->assertEquals(array(), self::$group->getLog());
     }
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$group = new Horde_Group_Mock();
     }

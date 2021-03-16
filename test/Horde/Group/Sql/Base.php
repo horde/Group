@@ -125,7 +125,7 @@ class Horde_Group_Test_Sql_Base extends Horde_Group_TestBase
         $this->_remove();
     }
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         $logger = new Horde_Log_Logger(new Horde_Log_Handler_Cli());
         //self::$db->setLogger($logger);
@@ -147,7 +147,7 @@ class Horde_Group_Test_Sql_Base extends Horde_Group_TestBase
         self::$group = new Horde_Group_Sql(array('db' => self::$db));
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         if (self::$migrator) {
             if (self::$db) {
@@ -163,7 +163,7 @@ class Horde_Group_Test_Sql_Base extends Horde_Group_TestBase
         parent::tearDownAfterClass();
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!self::$db) {
             $this->markTestSkipped(self::$reason);
