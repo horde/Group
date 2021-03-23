@@ -3,9 +3,6 @@
  * Prepare the test setup.
  */
 namespace Horde\Group\Sql;
-use Horde_Group_Test_Sql_Base as Base;
-
-require_once __DIR__ . '/Base.php';
 
 /**
  * Copyright 2013-2017 Horde LLC (http://www.horde.org/)

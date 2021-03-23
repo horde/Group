@@ -8,8 +8,10 @@
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
+namespace Horde\Group;
+use \Horde_Test_Case as TestCase;
 
-class Horde_Group_TestBase extends Horde_Test_Case
+class TestBase extends TestCase
 {
     protected static $group;
 

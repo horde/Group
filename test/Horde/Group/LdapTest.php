@@ -9,7 +9,6 @@
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
 namespace Horde\Group;
-use Horde_Group_TestBase as TestBase;
 
 class LdapTest extends TestBase
 {

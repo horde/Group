@@ -8,7 +8,13 @@
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Group_Test_Sql_Base extends Horde_Group_TestBase
+namespace Horde\Group\Sql;
+use Horde\Group\TestBase;
+use \Horde_Log_Logger;
+use \Horde_Log_Handler_Cli;
+use \Horde_Db_Migration_Migrator;
+
+class Base extends TestBase
 {
     protected static $db;
 

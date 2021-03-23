@@ -3,10 +3,8 @@
  * Prepare the test setup.
  */
 namespace Horde\Group\Sql\Pdo;
-use Horde_Group_Test_Sql_Base as Base;
+use Horde\Group\Sql\Base;
 use \PDO;
-
-require_once __DIR__ . '/../Base.php';
 
 /**
  * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
