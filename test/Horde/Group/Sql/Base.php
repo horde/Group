@@ -13,6 +13,7 @@ use Horde\Group\TestBase;
 use \Horde_Log_Logger;
 use \Horde_Log_Handler_Cli;
 use \Horde_Db_Migration_Migrator;
+use \Horde_Group_Sql;
 
 class Base extends TestBase
 {
