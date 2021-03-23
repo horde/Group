@@ -8,7 +8,13 @@
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Group_MockTest extends Horde_Group_TestBase
+namespace Horde\Group;
+use \Horde_Util;
+use \Horde_Group_Mock;
+use \Horde_Cache;
+use \Horde_Cache_Storage_Memory;
+
+class MockTest extends TestBase
 {
     public function testListAllWithNoGroupsCreated()
     {
@@ -126,10 +132,6 @@ class Horde_Group_MockTest extends Horde_Group_TestBase
 
     public function testCache()
     {
-        if (!class_exists('Horde_Cache')) {
-            $this->markTestSkipped('Horde_Cache not installed');
-        }
-
         foreach (self::$groupids as $id) {
             self::$group->remove($id);
         }
@@ -241,20 +243,16 @@ class Horde_Group_MockTest extends Horde_Group_TestBase
         self::$group->remove($id);
         self::$group->clearLog();
         $this->assertFalse(self::$group->exists($id));
-        try {
-            self::$group->getName($id);
-            $this->markTestFailed('Should have thrown an exception');
-        } catch (Horde_Exception_NotFound $e) {
-        }
-        try {
-            self::$group->getData($id);
-            $this->markTestFailed('Should have thrown an exception');
-        } catch (Horde_Exception_NotFound $e) {
-        }
+
+        $this->expectException('Horde_Exception_NotFound');
+        self::$group->getName($id);
+        
+        self::$group->getData($id);
+        
         $this->assertEquals(array(), self::$group->getLog());
     }
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$group = new Horde_Group_Mock();
     }

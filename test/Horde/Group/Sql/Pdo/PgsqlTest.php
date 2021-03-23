@@ -2,7 +2,9 @@
 /**
  * Prepare the test setup.
  */
-require_once __DIR__ . '/../Base.php';
+namespace Horde\Group\Sql\Pdo;
+use Horde\Group\Sql\Base;
+use \PDO;
 
 /**
  * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
@@ -13,9 +15,9 @@ require_once __DIR__ . '/../Base.php';
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Group_Sql_Pdo_PgsqlTest extends Horde_Group_Test_Sql_Base
+class PgsqlTest extends Base
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         if (!extension_loaded('pdo') ||
             !in_array('pgsql', PDO::getAvailableDrivers())) {

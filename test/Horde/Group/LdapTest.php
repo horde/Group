@@ -8,7 +8,9 @@
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Group_LdapTest extends Horde_Group_TestBase
+namespace Horde\Group;
+
+class LdapTest extends TestBase
 {
     protected static $ldap;
 
@@ -115,7 +117,7 @@ class Horde_Group_LdapTest extends Horde_Group_TestBase
         $this->_remove();
     }
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         if (!extension_loaded('ldap')) {
             self::$reason = 'No ldap extension';
@@ -131,7 +133,7 @@ class Horde_Group_LdapTest extends Horde_Group_TestBase
         }
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         $config = self::getConfig('GROUP_LDAP_TEST_CONFIG');
         if (self::$ldap) {
@@ -149,7 +151,7 @@ class Horde_Group_LdapTest extends Horde_Group_TestBase
         parent::tearDownAfterClass();
     }
 
-    public function setUp()
+    public function setUp(): void
     {
         if (!self::$ldap) {
             $this->markTestSkipped(self::$reason);

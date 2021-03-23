@@ -8,7 +8,10 @@
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-class Horde_Group_TestBase extends Horde_Test_Case
+namespace Horde\Group;
+use \Horde_Test_Case as TestCase;
+
+class TestBase extends TestCase
 {
     protected static $group;
 
@@ -133,7 +136,7 @@ class Horde_Group_TestBase extends Horde_Test_Case
         $this->assertFalse(self::$group->exists(self::$groupids[0]));
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::$group = null;
         self::$groupids = array();
