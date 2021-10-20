@@ -335,6 +335,16 @@ class Horde_Group_Ldap extends Horde_Group_Base
      */
     protected function _listUsers($gid)
     {
+        /**
+         *  If the group driver is LDAP, we must ignore groups with numeric IDs
+         *
+         * One of the possible root causes is the sharesng driver of any app.
+         * It can contain numeric group IDs when migrating from the SQL group
+         * backend to the ldap group backend with existing user data.
+         */
+        if (is_numeric($gid)) {
+            return [];
+        }
         $attr = $this->_params['memberuid'];
         try {
             $entry = $this->_ldap->getEntry($gid, array($attr));
