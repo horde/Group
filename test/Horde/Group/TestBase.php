@@ -133,7 +133,7 @@ class Horde_Group_TestBase extends Horde_Test_Case
         $this->assertFalse(self::$group->exists(self::$groupids[0]));
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         self::$group = null;
         self::$groupids = array();

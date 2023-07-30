@@ -259,7 +259,8 @@ abstract class Horde_Group_Base
     {
         // Use strlen() to catch "0" and "1".
         try {
-            if (strlen($exists = $this->_cache->get($this->_sig('exists_' . $gid), 0))) {
+            $exists = $this->_cache->get($this->_sig('exists_' . $gid), 0);
+            if (strlen(is_null($exists) ? "" : $exists)) {
                 return (bool)$exists;
             }
         } catch (Horde_Cache_Exception $e) {

@@ -15,7 +15,7 @@ require_once __DIR__ . '/../Base.php';
  */
 class Horde_Group_Sql_Pdo_MysqlTest extends Horde_Group_Test_Sql_Base
 {
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         if (!extension_loaded('pdo') ||
             !in_array('mysql', PDO::getAvailableDrivers())) {

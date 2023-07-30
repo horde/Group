@@ -254,7 +254,7 @@ class Horde_Group_MockTest extends Horde_Group_TestBase
         $this->assertEquals(array(), self::$group->getLog());
     }
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$group = new Horde_Group_Mock();
     }

@@ -95,7 +95,7 @@ class Horde_Group_FileTest extends Horde_Group_TestBase
         $this->assertEquals('My Other Group', self::$group->getName(self::$groupids[1]));
     }
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         self::$_groupfile = Horde_Util::getTempFile('Horde_Group_FileTest');
 
@@ -109,7 +109,7 @@ class Horde_Group_FileTest extends Horde_Group_TestBase
         self::$groupids = array('My Group', 'My Other Group', 'Not My Group');
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         unlink(self::$_groupfile);
         parent::tearDownAfterClass();
