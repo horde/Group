@@ -9,7 +9,7 @@ class HordeGroupUpgradeAutoIncrement extends Horde_Db_Migration_Base
         $this->changeColumn('horde_groups', 'group_uid', 'autoincrementKey');
         try {
             $this->dropTable('horde_groups_seq');
-        } catch (Horde_Db_Exception $e) {
+        } catch (Exception $e) {
         }
     }
 

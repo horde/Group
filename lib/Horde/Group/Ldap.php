@@ -509,7 +509,9 @@ class Horde_Group_Ldap extends Horde_Group_Base
 
         $nextgid = 0;
         foreach ($search as $entry) {
-            $nextgid = max($nextgid, $entry->getValue('gidnumber', 'single'));
+            if (count($entry->getValues()) > 0) {
+                $nextgid = max($nextgid, $entry->getValue('gidnumber', 'single'));
+            }
         }
 
         return $nextgid + 1;
