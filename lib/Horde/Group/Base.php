@@ -256,18 +256,26 @@ abstract class Horde_Group_Base
         return $exists;
     }
 
+    /**
+     * Check the cache for a group
+     *
+     * @return true|false|null Returns true if group is known present, false if group is known absent or null if the cache has no result on it
+     *
+     */
     protected function _checkExistsCache($gid)
     {
         // Use strlen() to catch "0" and "1".
         try {
             $exists = $this->_cache->get($this->_sig('exists_' . $gid), 0);
             if (is_string($exists) && strlen($exists)) {
+                // true or false if the cache knows
                 return (bool)$exists;
             }
         } catch (Horde_Cache_Exception $e) {
             // Shouldn't there be at least some optional logging?
         }
-        return false;
+        // The cache does not positively know if a group exists or doesn't.
+        return null;
     }
 
     /**
