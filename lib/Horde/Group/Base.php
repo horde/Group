@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 1999-2017 Horde LLC (http://www.horde.org/)
  *
@@ -24,10 +25,10 @@
 abstract class Horde_Group_Base
 {
     /** Cache prefix. */
-    const CACHE_PREFIX = 'horde_group_';
+    public const CACHE_PREFIX = 'horde_group_';
 
     /** Cache version. */
-    const CACHE_VERSION = 1;
+    public const CACHE_VERSION = 1;
 
     /**
      * Cache object.
@@ -259,11 +260,14 @@ abstract class Horde_Group_Base
     {
         // Use strlen() to catch "0" and "1".
         try {
-            if (strlen($exists = $this->_cache->get($this->_sig('exists_' . $gid), 0))) {
+            $exists = $this->_cache->get($this->_sig('exists_' . $gid), 0);
+            if (is_string($exists) && strlen($exists)) {
                 return (bool)$exists;
             }
         } catch (Horde_Cache_Exception $e) {
+            // Shouldn't there be at least some optional logging?
         }
+        return false;
     }
 
     /**
