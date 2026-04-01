@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 1999-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 1999-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -68,7 +69,8 @@ class Horde_Group_Sql extends Horde_Group_Base
         try {
             return $this->_db->insert(
                 'INSERT INTO horde_groups (group_name, group_email, group_parents) VALUES (?, ?, ?)',
-                array($name, $email, ''));
+                [$name, $email, '']
+            );
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
@@ -87,7 +89,8 @@ class Horde_Group_Sql extends Horde_Group_Base
         try {
             return $this->_db->update(
                 'UPDATE horde_groups SET group_name = ? WHERE group_uid = ?',
-                array($name, $gid));
+                [$name, $gid]
+            );
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
@@ -106,10 +109,12 @@ class Horde_Group_Sql extends Horde_Group_Base
             $this->_db->beginDbTransaction();
             $this->_db->delete(
                 'DELETE FROM horde_groups_members WHERE group_uid = ?',
-                array($gid));
+                [$gid]
+            );
             $this->_db->delete(
                 'DELETE FROM horde_groups WHERE group_uid = ?',
-                array($gid));
+                [$gid]
+            );
             $this->_db->commitDbTransaction();
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Group_Exception($e);
@@ -127,9 +132,10 @@ class Horde_Group_Sql extends Horde_Group_Base
     protected function _exists($gid)
     {
         try {
-            return (bool)$this->_db->selectValue(
+            return (bool) $this->_db->selectValue(
                 'SELECT 1 FROM horde_groups WHERE group_uid = ?',
-                array($gid));
+                [$gid]
+            );
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
@@ -148,7 +154,8 @@ class Horde_Group_Sql extends Horde_Group_Base
         try {
             return $this->_db->selectValue(
                 'SELECT group_name FROM horde_groups WHERE group_uid = ?',
-                array($gid));
+                [$gid]
+            );
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
@@ -168,14 +175,15 @@ class Horde_Group_Sql extends Horde_Group_Base
         try {
             $result = $this->_db->selectOne(
                 'SELECT * FROM horde_groups WHERE group_uid = ?',
-                array($gid));
+                [$gid]
+            );
             if (!$result) {
                 throw new Horde_Exception_NotFound('Group with the ID ' . $gid . ' not found');
             }
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
-        $data = array();
+        $data = [];
         foreach ($result as $attribute => $value) {
             $data[preg_replace('/^group_/', '', $attribute)] = $value;
         }
@@ -197,15 +205,17 @@ class Horde_Group_Sql extends Horde_Group_Base
     {
         $attributes = is_array($attribute)
             ? $attribute
-            : array($attribute => $value);
-        $updates = array();
+            : [$attribute => $value];
+        $updates = [];
         foreach ($attributes as $attribute => $value) {
             $updates[] = $this->_db->quoteColumnName('group_' . $attribute)
                 . ' = ' . $this->_db->quote($value);
         }
         try {
-            $this->_db->update('UPDATE horde_groups SET ' . implode(', ', $updates) . ' WHERE group_uid = ?',
-                                array($gid));
+            $this->_db->update(
+                'UPDATE horde_groups SET ' . implode(', ', $updates) . ' WHERE group_uid = ?',
+                [$gid]
+            );
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
@@ -240,7 +250,8 @@ class Horde_Group_Sql extends Horde_Group_Base
         try {
             return $this->_db->selectValues(
                 'SELECT user_uid FROM horde_groups_members WHERE group_uid = ? ORDER BY user_uid ASC',
-                array($gid));
+                [$gid]
+            );
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
@@ -259,7 +270,8 @@ class Horde_Group_Sql extends Horde_Group_Base
         try {
             return $this->_db->selectAssoc(
                 'SELECT g.group_uid AS group_uid, g.group_name AS group_name FROM horde_groups g, horde_groups_members m WHERE m.user_uid = ? AND g.group_uid = m.group_uid ORDER BY g.group_name',
-                array($user));
+                [$user]
+            );
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
@@ -277,7 +289,9 @@ class Horde_Group_Sql extends Horde_Group_Base
     {
         try {
             $this->_db->insert(
-                'INSERT INTO horde_groups_members (group_uid, user_uid) VALUES (?, ?)', array($gid, $user));
+                'INSERT INTO horde_groups_members (group_uid, user_uid) VALUES (?, ?)',
+                [$gid, $user]
+            );
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
@@ -296,7 +310,8 @@ class Horde_Group_Sql extends Horde_Group_Base
         try {
             $this->_db->delete(
                 'DELETE FROM horde_groups_members WHERE group_uid = ? AND user_uid = ?',
-                array($gid, $user));
+                [$gid, $user]
+            );
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
@@ -316,7 +331,8 @@ class Horde_Group_Sql extends Horde_Group_Base
         try {
             return $this->_db->selectAssoc(
                 'SELECT group_uid, group_name FROM horde_groups WHERE group_name LIKE ?',
-                array('%' . $name . '%'));
+                ['%' . $name . '%']
+            );
         } catch (Horde_Db_Exception $e) {
             throw new Horde_Group_Exception($e);
         }

@@ -1,4 +1,5 @@
 <?php
+
 class HordeGroupUpgradeNullParents extends Horde_Db_Migration_Base
 {
     /**
@@ -6,7 +7,7 @@ class HordeGroupUpgradeNullParents extends Horde_Db_Migration_Base
      */
     public function up()
     {
-        $this->changeColumn('horde_groups', 'group_parents', 'string', array('limit' => 255));
+        $this->changeColumn('horde_groups', 'group_parents', 'string', ['limit' => 255]);
     }
 
     /**
@@ -14,7 +15,7 @@ class HordeGroupUpgradeNullParents extends Horde_Db_Migration_Base
      */
     public function down()
     {
-        $this->changeColumn('horde_groups', 'group_parents', 'string', array('limit' => 255, 'null' => false));
+        $this->changeColumn('horde_groups', 'group_parents', 'string', ['limit' => 255, 'null' => false]);
     }
 
 }

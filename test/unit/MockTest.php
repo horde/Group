@@ -1,6 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Copyright 2011-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 The Horde Project (http://www.horde.org/)
+ *
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  *
  * @author     Jan Schneider <jan@horde.org>
  * @category   Horde
@@ -8,129 +14,111 @@
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-namespace Horde\Group;
-use \Horde_Util;
-use \Horde_Group_Mock;
-use \Horde_Cache;
-use \Horde_Cache_Storage_Memory;
 
+namespace Horde\Group;
+
+use PHPUnit\Framework\Attributes\{CoversClass, Depends};
+use Horde_Group_Mock;
+use Horde_Group_Base;
+use Horde_Cache;
+use Horde_Cache_Storage_Memory;
+
+/**
+ * @coversNothing
+ */
+#[CoversClass(Horde_Group_Mock::class)]
+#[CoversClass(Horde_Group_Base::class)]
 class MockTest extends TestBase
 {
-    public function testListAllWithNoGroupsCreated()
+    public function testListAllWithNoGroupsCreated(): void
     {
-        $this->assertEquals(array(), self::$group->listAll());
+        $this->assertEquals([], self::$group->listAll());
     }
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->_create();
     }
 
-    /**
-     * @depends testCreate
-     */
-    public function testExists()
+    #[Depends('testCreate')]
+    public function testExists(): void
     {
         $this->_exists('some_none_existing_id');
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testGetName()
+    #[Depends('testExists')]
+    public function testGetName(): void
     {
         $this->_getName();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testGetData()
+    #[Depends('testExists')]
+    public function testGetData(): void
     {
         $this->_getData();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testListAll()
+    #[Depends('testExists')]
+    public function testListAll(): void
     {
         $this->_listAll();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testSearch()
+    #[Depends('testExists')]
+    public function testSearch(): void
     {
         $this->_search();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testAddUser()
+    #[Depends('testExists')]
+    public function testAddUser(): void
     {
         $this->_addUser();
     }
 
-    /**
-     * @depends testAddUser
-     */
-    public function testListUsers()
+    #[Depends('testAddUser')]
+    public function testListUsers(): void
     {
         $this->_listUsers();
     }
 
-    /**
-     * @depends testAddUser
-     */
-    public function testListGroups()
+    #[Depends('testAddUser')]
+    public function testListGroups(): void
     {
         $this->_listGroups();
     }
 
-    /**
-     * @depends testAddUser
-     */
-    public function testListAllWithMember()
+    #[Depends('testAddUser')]
+    public function testListAllWithMember(): void
     {
         $this->_listAllWithMember();
     }
 
-    /**
-     * @depends testListGroups
-     */
-    public function testRemoveUser()
+    #[Depends('testListGroups')]
+    public function testRemoveUser(): void
     {
         $this->_removeUser();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testRename()
+    #[Depends('testExists')]
+    public function testRename(): void
     {
         $this->_rename();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testSetData()
+    #[Depends('testExists')]
+    public function testSetData(): void
     {
         $this->_setData();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testRemove()
+    #[Depends('testExists')]
+    public function testRemove(): void
     {
         $this->_remove();
     }
 
-    public function testCache()
+    public function testCache(): void
     {
         foreach (self::$groupids as $id) {
             self::$group->remove($id);
@@ -145,18 +133,18 @@ class MockTest extends TestBase
         $this->assertEquals('_exists', array_pop($log));
         self::$group->clearLog();
         $this->assertTrue(self::$group->exists($id));
-        $this->assertEquals(array(), self::$group->getLog());
+        $this->assertEquals([], self::$group->getLog());
 
         $this->assertEquals('Cached Group', self::$group->getName($id));
         $log = self::$group->getLog();
         $this->assertEquals('_getName', array_pop($log));
         self::$group->clearLog();
         $this->assertEquals('Cached Group', self::$group->getName($id));
-        $this->assertEquals(array(), self::$group->getLog());
+        $this->assertEquals([], self::$group->getLog());
         self::$group->rename($id, 'Cached Group 2');
         self::$group->clearLog();
         $this->assertEquals('Cached Group 2', self::$group->getName($id));
-        $this->assertEquals(array(), self::$group->getLog());
+        $this->assertEquals([], self::$group->getLog());
 
         $data = self::$group->getData($id);
         $this->assertEquals('Cached Group 2', $data['name']);
@@ -167,78 +155,78 @@ class MockTest extends TestBase
         $data = self::$group->getData($id);
         $this->assertEquals('Cached Group 2', $data['name']);
         $this->assertNull($data['email']);
-        $this->assertEquals(array(), self::$group->getLog());
+        $this->assertEquals([], self::$group->getLog());
         self::$group->setData($id, 'email', 'test@example.com');
         self::$group->clearLog();
         $data = self::$group->getData($id);
         $this->assertEquals('Cached Group 2', $data['name']);
         $this->assertEquals('test@example.com', $data['email']);
-        $this->assertEquals(array(), self::$group->getLog());
+        $this->assertEquals([], self::$group->getLog());
 
         $this->assertEquals(
-            array($id => 'Cached Group 2'),
+            [$id => 'Cached Group 2'],
             self::$group->listAll()
         );
         $log = self::$group->getLog();
         $this->assertEquals('_listAll', array_pop($log));
         self::$group->clearLog();
         $this->assertEquals(
-            array($id => 'Cached Group 2'),
+            [$id => 'Cached Group 2'],
             self::$group->listAll()
         );
-        $this->assertEquals(array(), self::$group->getLog());
+        $this->assertEquals([], self::$group->getLog());
 
         $this->assertEquals(
-            array($id => 'Cached Group 2'),
+            [$id => 'Cached Group 2'],
             self::$group->search('Group')
         );
         $log = self::$group->getLog();
         $this->assertEquals('_search', array_pop($log));
         self::$group->clearLog();
         $this->assertEquals(
-            array($id => 'Cached Group 2'),
+            [$id => 'Cached Group 2'],
             self::$group->search('Group')
         );
-        $this->assertEquals(array(), self::$group->getLog());
+        $this->assertEquals([], self::$group->getLog());
 
-        $this->assertEquals(array(), self::$group->listUsers($id));
+        $this->assertEquals([], self::$group->listUsers($id));
         $log = self::$group->getLog();
         $this->assertEquals('_listUsers', array_pop($log));
         self::$group->clearLog();
-        $this->assertEquals(array(), self::$group->listUsers($id));
-        $this->assertEquals(array(), self::$group->getLog());
+        $this->assertEquals([], self::$group->listUsers($id));
+        $this->assertEquals([], self::$group->getLog());
 
         self::$group->addUser($id, 'user1');
         self::$group->addUser($id, 'user2');
         self::$group->clearLog();
 
         $this->assertEquals(
-            array('user1', 'user2'),
+            ['user1', 'user2'],
             self::$group->listUsers($id)
         );
-        $this->assertEquals(array(), self::$group->getLog());
+        $this->assertEquals([], self::$group->getLog());
         self::$group->removeUser($id, 'user2');
         self::$group->clearLog();
-        $this->assertEquals(array('user1'), self::$group->listUsers($id));
-        $this->assertEquals(array(), self::$group->getLog());
+        $this->assertEquals(['user1'], self::$group->listUsers($id));
+        $this->assertEquals([], self::$group->getLog());
 
         $this->assertEquals(
-            array($id => 'Cached Group 2'),
+            [$id => 'Cached Group 2'],
             self::$group->listGroups('user1')
         );
         $log = self::$group->getLog();
         $this->assertEquals('_listGroups', array_pop($log));
         self::$group->clearLog();
         $this->assertEquals(
-            array($id => 'Cached Group 2'),
+            [$id => 'Cached Group 2'],
             self::$group->listGroups('user1')
         );
-        $this->assertEquals(array(), self::$group->getLog());
+        $this->assertEquals([], self::$group->getLog());
         $this->assertEquals(
-            array($id => 'Cached Group 2'),
+            [$id => 'Cached Group 2'],
             self::$group->listAll('user1')
         );
-        $this->assertEquals(array(), self::$group->getLog());
+        $this->assertEquals([], self::$group->getLog());
 
         self::$group->remove($id);
         self::$group->clearLog();
@@ -246,10 +234,10 @@ class MockTest extends TestBase
 
         $this->expectException('Horde_Exception_NotFound');
         self::$group->getName($id);
-        
+
         self::$group->getData($id);
-        
-        $this->assertEquals(array(), self::$group->getLog());
+
+        $this->assertEquals([], self::$group->getLog());
     }
 
     public static function setUpBeforeClass(): void

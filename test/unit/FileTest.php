@@ -1,6 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Copyright 2011-2016 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 The Horde Project (http://www.horde.org/)
+ *
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  *
  * @author     Thomas Jarosch <thomas.jarosch@intra2net.com>
  * @category   Horde
@@ -8,10 +14,19 @@
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-namespace Horde\Group;
-use \Horde_Util;
-use \Horde_Group_File;
 
+namespace Horde\Group;
+
+use PHPUnit\Framework\Attributes\{CoversClass, Depends};
+use Horde_Util;
+use Horde_Group_File;
+use Horde_Group_Base;
+
+/**
+ * @coversNothing
+ */
+#[CoversClass(Horde_Group_File::class)]
+#[CoversClass(Horde_Group_Base::class)]
 class FileTest extends TestBase
 {
     /**
@@ -21,52 +36,42 @@ class FileTest extends TestBase
      */
     protected static $_groupfile = '';
 
-    public function testExists()
+    public function testExists(): void
     {
         $this->_exists('some_none_existing_id');
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testGetName()
+    #[Depends('testExists')]
+    public function testGetName(): void
     {
         $this->_getName();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testListAll()
+    #[Depends('testExists')]
+    public function testListAll(): void
     {
         $this->_listAll();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testSearch()
+    #[Depends('testExists')]
+    public function testSearch(): void
     {
         $this->_search();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testListUsers()
+    #[Depends('testExists')]
+    public function testListUsers(): void
     {
         $this->_listUsers();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testListGroups()
+    #[Depends('testExists')]
+    public function testListGroups(): void
     {
         $this->_listGroups();
     }
 
-    public function testGroupWithUmlaut()
+    public function testGroupWithUmlaut(): void
     {
         $filename = Horde_Util::getTempFile('Horde_Group_FileTest');
 
@@ -77,19 +82,19 @@ class FileTest extends TestBase
         fwrite($fp, "$group_name:x:1:$user_name\n");
         fclose($fp);
 
-        $params = array('filename' => $filename);
+        $params = ['filename' => $filename];
         $group = new Horde_Group_File($params);
 
         $this->assertTrue($group->exists($group_name));
         $this->assertEquals($group_name, $group->getName($group_name));
-        $this->assertEquals(array($user_name), $group->listUsers($group_name));
+        $this->assertEquals([$user_name], $group->listUsers($group_name));
     }
 
-    public function testGidFromFile()
+    public function testGidFromFile(): void
     {
-        $params = array('filename' => self::$_groupfile, 'use_gid' => true);
+        $params = ['filename' => self::$_groupfile, 'use_gid' => true];
         self::$group = new Horde_Group_File($params);
-        self::$groupids = array(1, 2, 3);
+        self::$groupids = [1, 2, 3];
 
         $this->assertTrue(self::$group->exists(self::$groupids[0]));
         $this->assertTrue(self::$group->exists(self::$groupids[1]));
@@ -109,8 +114,8 @@ class FileTest extends TestBase
         fwrite($fp, "Not My Group:x:3:jeff,steve\n");
         fclose($fp);
 
-        self::$group = new Horde_Group_File(array('filename' => self::$_groupfile));
-        self::$groupids = array('My Group', 'My Other Group', 'Not My Group');
+        self::$group = new Horde_Group_File(['filename' => self::$_groupfile]);
+        self::$groupids = ['My Group', 'My Other Group', 'Not My Group'];
     }
 
     public static function tearDownAfterClass(): void

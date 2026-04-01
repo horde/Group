@@ -1,6 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Copyright 2011-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 The Horde Project (http://www.horde.org/)
+ *
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  *
  * @author     Jan Schneider <jan@horde.org>
  * @category   Horde
@@ -8,14 +14,16 @@
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
-namespace Horde\Group\Sql;
-use Horde\Group\TestBase;
-use \Horde_Log_Logger;
-use \Horde_Log_Handler_Cli;
-use \Horde_Db_Migration_Migrator;
-use \Horde_Group_Sql;
 
-class Base extends TestBase
+namespace Horde\Group;
+
+use PHPUnit\Framework\Attributes\Depends;
+use Horde_Log_Logger;
+use Horde_Log_Handler_Cli;
+use Horde_Db_Migration_Migrator;
+use Horde_Group_Sql;
+
+class SqlTestBase extends TestBase
 {
     protected static $db;
 
@@ -23,15 +31,13 @@ class Base extends TestBase
 
     protected static $reason;
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->_create();
     }
 
-    /**
-     * @depends testCreate
-     */
-    public function testExists()
+    #[Depends('testCreate')]
+    public function testExists(): void
     {
         $this->_exists(99999);
     }
@@ -39,7 +45,7 @@ class Base extends TestBase
     /**
      * @depends testExists
      */
-    public function testGetName()
+    public function testGetName(): void
     {
         $this->_getName();
     }
@@ -47,7 +53,7 @@ class Base extends TestBase
     /**
      * @depends testExists
      */
-    public function testGetData()
+    public function testGetData(): void
     {
         $this->_getData();
     }
@@ -55,7 +61,7 @@ class Base extends TestBase
     /**
      * @depends testExists
      */
-    public function testListAll()
+    public function testListAll(): void
     {
         $this->_listAll();
     }
@@ -63,7 +69,7 @@ class Base extends TestBase
     /**
      * @depends testExists
      */
-    public function testSearch()
+    public function testSearch(): void
     {
         $this->_search();
     }
@@ -71,7 +77,7 @@ class Base extends TestBase
     /**
      * @depends testExists
      */
-    public function testAddUser()
+    public function testAddUser(): void
     {
         $this->_addUser();
     }
@@ -79,7 +85,7 @@ class Base extends TestBase
     /**
      * @depends testAddUser
      */
-    public function testListUsers()
+    public function testListUsers(): void
     {
         $this->_listUsers();
     }
@@ -87,7 +93,7 @@ class Base extends TestBase
     /**
      * @depends testAddUser
      */
-    public function testListGroups()
+    public function testListGroups(): void
     {
         $this->_listGroups();
     }
@@ -95,7 +101,7 @@ class Base extends TestBase
     /**
      * @depends testAddUser
      */
-    public function testListAllWithMember()
+    public function testListAllWithMember(): void
     {
         $this->_listAllWithMember();
     }
@@ -103,7 +109,7 @@ class Base extends TestBase
     /**
      * @depends testListGroups
      */
-    public function testRemoveUser()
+    public function testRemoveUser(): void
     {
         $this->_removeUser();
     }
@@ -111,7 +117,7 @@ class Base extends TestBase
     /**
      * @depends testExists
      */
-    public function testRename()
+    public function testRename(): void
     {
         $this->_rename();
     }
@@ -119,7 +125,7 @@ class Base extends TestBase
     /**
      * @depends testExists
      */
-    public function testSetData()
+    public function testSetData(): void
     {
         $this->_setData();
     }
@@ -127,7 +133,7 @@ class Base extends TestBase
     /**
      * @depends testExists
      */
-    public function testRemove()
+    public function testRemove(): void
     {
         $this->_remove();
     }
@@ -136,7 +142,7 @@ class Base extends TestBase
     {
         $logger = new Horde_Log_Logger(new Horde_Log_Handler_Cli());
         //self::$db->setLogger($logger);
-        $dir = __DIR__ . '/../../../../migration/Horde/Group';
+        $dir = __DIR__ . '/../../migration/Horde/Group';
         if (!is_dir($dir)) {
             error_reporting(E_ALL & ~E_DEPRECATED);
             $dir = PEAR_Config::singleton()
@@ -147,11 +153,12 @@ class Base extends TestBase
         self::$migrator = new Horde_Db_Migration_Migrator(
             self::$db,
             null,//$logger,
-            array('migrationsPath' => $dir,
-                  'schemaTableName' => 'horde_groups_schema_info'));
+            ['migrationsPath' => $dir,
+                'schemaTableName' => 'horde_groups_schema_info']
+        );
         self::$migrator->up();
 
-        self::$group = new Horde_Group_Sql(array('db' => self::$db));
+        self::$group = new Horde_Group_Sql(['db' => self::$db]);
     }
 
     public static function tearDownAfterClass(): void

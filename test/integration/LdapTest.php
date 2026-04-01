@@ -1,6 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Copyright 2011-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 The Horde Project (http://www.horde.org/)
+ *
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  *
  * @author     Jan Schneider <jan@horde.org>
  * @category   Horde
@@ -8,111 +14,99 @@
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
+
 namespace Horde\Group;
 
+use PHPUnit\Framework\Attributes\{CoversClass, Depends};
+use Horde_Group_Ldap;
+use Horde_Group_Base;
+use Horde_Ldap;
+use Horde_Ldap_Exception;
+
+/**
+ * @coversNothing
+ */
+#[CoversClass(Horde_Group_Ldap::class)]
+#[CoversClass(Horde_Group_Base::class)]
 class LdapTest extends TestBase
 {
     protected static $ldap;
 
     protected static $reason;
 
-    public function testCreate()
+    public function testCreate(): void
     {
         $this->_create();
     }
 
-    /**
-     * @depends testCreate
-     */
-    public function testExists()
+    #[Depends('testCreate')]
+    public function testExists(): void
     {
         $this->_exists('cn=some_none_existing_id');
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testGetName()
+    #[Depends('testExists')]
+    public function testGetName(): void
     {
         $this->_getName();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testGetData()
+    #[Depends('testExists')]
+    public function testGetData(): void
     {
         $this->_getData();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testListAll()
+    #[Depends('testExists')]
+    public function testListAll(): void
     {
         $this->_listAll();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testSearch()
+    #[Depends('testExists')]
+    public function testSearch(): void
     {
         $this->_search();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testAddUser()
+    #[Depends('testExists')]
+    public function testAddUser(): void
     {
         $this->_addUser();
     }
 
-    /**
-     * @depends testAddUser
-     */
-    public function testListUsers()
+    #[Depends('testAddUser')]
+    public function testListUsers(): void
     {
         $this->_listUsers();
     }
 
-    /**
-     * @depends testAddUser
-     */
-    public function testListGroups()
+    #[Depends('testAddUser')]
+    public function testListGroups(): void
     {
         $this->_listGroups();
     }
 
-    /**
-     * @depends testAddUser
-     */
-    public function testListAllWithMember()
+    #[Depends('testAddUser')]
+    public function testListAllWithMember(): void
     {
         $this->_listAllWithMember();
     }
 
-    /**
-     * @depends testListGroups
-     */
-    public function testRemoveUser()
+    #[Depends('testListGroups')]
+    public function testRemoveUser(): void
     {
         $this->_removeUser();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testSetData()
+    #[Depends('testExists')]
+    public function testSetData(): void
     {
         $this->_setData();
     }
 
-    /**
-     * @depends testExists
-     */
-    public function testRemove()
+    #[Depends('testExists')]
+    public function testRemove(): void
     {
         $this->_remove();
     }
@@ -137,9 +131,11 @@ class LdapTest extends TestBase
     {
         $config = self::getConfig('GROUP_LDAP_TEST_CONFIG');
         if (self::$ldap) {
-            $possibleids = array('My Group', 'My Other Group', 'My Second Group', 'Not My Group');
-            self::$ldap->bind($config['group']['ldap']['writedn'],
-                              $config['group']['ldap']['writepw']);
+            $possibleids = ['My Group', 'My Other Group', 'My Second Group', 'Not My Group'];
+            self::$ldap->bind(
+                $config['group']['ldap']['writedn'],
+                $config['group']['ldap']['writepw']
+            );
             foreach ($possibleids as $id) {
                 try {
                     self::$ldap->delete('cn=' . $id . ',' . $config['group']['ldap']['basedn']);

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2008-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2008-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -27,14 +28,14 @@ class Horde_Group_Mock extends Horde_Group_Base
      *
      * @var array
      */
-    protected $_groups = array();
+    protected $_groups = [];
 
     /**
      * Access log.
      *
      * @var array
      */
-    protected $_log = array();
+    protected $_log = [];
 
     /**
      * Returns the current method call log.
@@ -51,7 +52,7 @@ class Horde_Group_Mock extends Horde_Group_Base
      */
     public function clearLog()
     {
-        $this->_log = array();
+        $this->_log = [];
     }
 
     /**
@@ -78,9 +79,9 @@ class Horde_Group_Mock extends Horde_Group_Base
     {
         $this->_log();
         $id = 'group_' . count($this->_groups);
-        $this->_groups[$id] = array('name'  => $name,
-                                    'email' => $email,
-                                    'users' => array());
+        $this->_groups[$id] = ['name'  => $name,
+            'email' => $email,
+            'users' => []];
         return $id;
     }
 
@@ -198,7 +199,7 @@ class Horde_Group_Mock extends Horde_Group_Base
     protected function _listAll()
     {
         $this->_log();
-        $groups = array();
+        $groups = [];
         foreach ($this->_groups as $gid => $group) {
             $groups[$gid] = $group['name'];
         }
@@ -234,7 +235,7 @@ class Horde_Group_Mock extends Horde_Group_Base
     protected function _listGroups($user)
     {
         $this->_log();
-        $groups = array();
+        $groups = [];
         foreach ($this->_groups as $gid => $group) {
             if (in_array($user, $group['users'])) {
                 $groups[$gid] = $group['name'];
@@ -293,7 +294,7 @@ class Horde_Group_Mock extends Horde_Group_Base
     protected function _search($name)
     {
         $this->_log();
-        $groups = array();
+        $groups = [];
         foreach ($this->_groups as $gid => $group) {
             if (strpos($group['name'], $name) !== false) {
                 $groups[$gid] = $group['name'];

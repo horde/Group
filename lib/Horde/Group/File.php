@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2012-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file COPYING for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -38,7 +39,7 @@ class Horde_Group_File extends Horde_Group_Base
      *
      * @var array
      */
-    protected $_groups = array();
+    protected $_groups = [];
 
     /**
      * Constructor.
@@ -53,7 +54,7 @@ class Horde_Group_File extends Horde_Group_Base
     public function __construct($params)
     {
         $params = array_merge(
-            array('use_gid' => false),
+            ['use_gid' => false],
             $params
         );
 
@@ -62,7 +63,8 @@ class Horde_Group_File extends Horde_Group_Base
         $fp = @fopen($params['filename'], 'r');
         if (!$fp) {
             throw new Horde_Group_Exception(
-                'Cannot open ' . $params['filename']);
+                'Cannot open ' . $params['filename']
+            );
         }
 
         while (!feof($fp)) {
@@ -75,10 +77,10 @@ class Horde_Group_File extends Horde_Group_Base
 
             // either use gid from file or group name as id
             $id = $params['use_gid'] ? $m[2] : $m[1];
-            $this->_groups[$id] = array(
+            $this->_groups[$id] = [
                 'name' => $m[1],
-                'users' => explode(',', $m[3])
-            );
+                'users' => explode(',', $m[3]),
+            ];
         }
         fclose($fp);
     }
@@ -125,7 +127,7 @@ class Horde_Group_File extends Horde_Group_Base
             throw new Horde_Exception_NotFound();
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -136,7 +138,7 @@ class Horde_Group_File extends Horde_Group_Base
      */
     protected function _listAll()
     {
-        $groups = array();
+        $groups = [];
         foreach ($this->_groups as $id => $group) {
             $groups[$id] = $group['name'];
         }
@@ -168,7 +170,7 @@ class Horde_Group_File extends Horde_Group_Base
      */
     protected function _listGroups($user)
     {
-        $groups = array();
+        $groups = [];
         foreach ($this->_groups as $id => $group) {
             if (in_array($user, $group['users'])) {
                 $groups[$id] = $group['name'];
@@ -187,7 +189,7 @@ class Horde_Group_File extends Horde_Group_Base
      */
     protected function _search($name)
     {
-        $groups = array();
+        $groups = [];
         foreach ($this->_groups as $id => $group) {
             if (stripos($group['name'], $name) !== false) {
                 $groups[$id] = $group['name'];

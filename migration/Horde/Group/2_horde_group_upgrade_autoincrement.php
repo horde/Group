@@ -1,4 +1,5 @@
 <?php
+
 class HordeGroupUpgradeAutoIncrement extends Horde_Db_Migration_Base
 {
     /**
@@ -19,7 +20,7 @@ class HordeGroupUpgradeAutoIncrement extends Horde_Db_Migration_Base
      */
     public function down()
     {
-        $this->changeColumn('horde_groups', 'group_uid', 'integer', array('null' => false, 'unsigned' => true));
+        $this->changeColumn('horde_groups', 'group_uid', 'integer', ['null' => false, 'unsigned' => true]);
     }
 
 }

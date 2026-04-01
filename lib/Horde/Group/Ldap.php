@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2005-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2005-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -55,17 +56,17 @@ class Horde_Group_Ldap extends Horde_Group_Base
         parent::__construct($params);
 
         $params = array_merge(
-            array('binddn'               => '',
-                  'bindpw'               => '',
-                  'gid'                  => 'cn',
-                  'memberuid'            => 'memberUid',
-                  'objectclass'          => array('posixGroup'),
-                  'newgroup_objectclass' => array('posixGroup')),
+            ['binddn'               => '',
+                'bindpw'               => '',
+                'gid'                  => 'cn',
+                'memberuid'            => 'memberUid',
+                'objectclass'          => ['posixGroup'],
+                'newgroup_objectclass' => ['posixGroup']],
             $params
         );
 
         /* Check mandatory parameters. */
-        foreach (array('ldap', 'basedn') as $param) {
+        foreach (['ldap', 'basedn'] as $param) {
             if (!isset($params[$param])) {
                 throw new Horde_Group_Exception('The \'' . $param . '\' parameter is missing.');
             }
@@ -79,7 +80,7 @@ class Horde_Group_Ldap extends Horde_Group_Base
         $params['gid']       = Horde_String::lower($params['gid']);
         $params['memberuid'] = Horde_String::lower($params['memberuid']);
         if (!is_array($params['newgroup_objectclass'])) {
-            $params['newgroup_objectclass'] = array($params['newgroup_objectclass']);
+            $params['newgroup_objectclass'] = [$params['newgroup_objectclass']];
         }
         foreach ($params['newgroup_objectclass'] as &$objectClass) {
             $objectClass = Horde_String::lower($objectClass);
@@ -102,8 +103,8 @@ class Horde_Group_Ldap extends Horde_Group_Base
      */
     public function readOnly()
     {
-        return !isset($this->_params['writedn']) ||
-               !isset($this->_params['writepw']);
+        return !isset($this->_params['writedn'])
+               || !isset($this->_params['writepw']);
     }
 
     /**
@@ -131,16 +132,16 @@ class Horde_Group_Ldap extends Horde_Group_Base
             throw new Horde_Group_Exception('This group backend is read-only.');
         }
 
-        $attributes = array(
+        $attributes = [
             $this->_params['gid'] => $name,
             'objectclass'         => $this->_params['newgroup_objectclass'],
-            'gidnumber'           => $this->_nextGid()
-        );
+            'gidnumber'           => $this->_nextGid(),
+        ];
         if (!empty($email)) {
             $attributes['mail'] = $email;
         }
 
-        $dn = Horde_Ldap::quoteDN(array(array($this->_params['gid'], $name)))
+        $dn = Horde_Ldap::quoteDN([[$this->_params['gid'], $name]])
             . ',' . $this->_params['basedn'];
         try {
             $entry = Horde_Ldap_Entry::createFresh($dn, $attributes);
@@ -242,15 +243,15 @@ class Horde_Group_Ldap extends Horde_Group_Base
         } catch (Horde_Ldap_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
-        $data = array();
+        $data = [];
         foreach ($attributes as $attribute => $value) {
             switch ($attribute) {
-            case $this->_params['gid']:
-                $attribute = 'name';
-                break;
-            case 'mail':
-                $attribute = 'email';
-                break;
+                case $this->_params['gid']:
+                    $attribute = 'name';
+                    break;
+                case 'mail':
+                    $attribute = 'email';
+                    break;
             }
             $data[$attribute] = $value;
         }
@@ -277,19 +278,19 @@ class Horde_Group_Ldap extends Horde_Group_Base
 
         $attributes = is_array($attribute)
             ? $attribute
-            : array($attribute => $value);
+            : [$attribute => $value];
         try {
             $entry = $this->_ldap->getEntry($gid);
             foreach ($attributes as $attribute => $value) {
                 switch ($attribute) {
-                case 'name':
-                    $attribute = $this->_params['gid'];
-                    break;
-                case 'email':
-                    $attribute = 'mail';
-                    break;
+                    case 'name':
+                        $attribute = $this->_params['gid'];
+                        break;
+                    case 'email':
+                        $attribute = 'mail';
+                        break;
                 }
-                $entry->replace(array($attribute => $value));
+                $entry->replace([$attribute => $value]);
             }
             $this->_rebind(true);
             $entry->update();
@@ -310,15 +311,17 @@ class Horde_Group_Ldap extends Horde_Group_Base
     {
         $attr = $this->_params['gid'];
         try {
-            $search = $this->_ldap->search($this->_params['basedn'],
-                                           $this->_filter,
-                                           array($attr));
+            $search = $this->_ldap->search(
+                $this->_params['basedn'],
+                $this->_filter,
+                [$attr]
+            );
         } catch (Horde_Ldap_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
 
-        $entries = array();
-        foreach ($search->sortedAsArray(array($attr)) as $entry) {
+        $entries = [];
+        foreach ($search->sortedAsArray([$attr]) as $entry) {
             $entries[$entry['dn']] = $entry[$attr][0];
         }
         return $entries;
@@ -347,19 +350,21 @@ class Horde_Group_Ldap extends Horde_Group_Base
         }
         $attr = $this->_params['memberuid'];
         try {
-            $entry = $this->_ldap->getEntry($gid, array($attr));
+            $entry = $this->_ldap->getEntry($gid, [$attr]);
             if (!$entry->exists($attr)) {
-                return array();
+                return [];
             }
 
             if (empty($this->_params['attrisdn'])) {
                 return $entry->getValue($attr, 'all');
             }
 
-            $users = array();
+            $users = [];
             foreach ($entry->getValue($attr, 'all') as $user) {
-                $dn = Horde_Ldap_Util::explodeDN($user,
-                                                 array('onlyvalues' => true));
+                $dn = Horde_Ldap_Util::explodeDN(
+                    $user,
+                    ['onlyvalues' => true]
+                );
                 // Very simplified approach: assume the first element of the DN
                 // contains the user ID.
                 $user = $dn[0];
@@ -371,7 +376,7 @@ class Horde_Group_Ldap extends Horde_Group_Base
             }
             return $users;
         } catch (Horde_Exception_NotFound $e) {
-            return array();
+            return [];
         } catch (Horde_Ldap_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
@@ -392,16 +397,22 @@ class Horde_Group_Ldap extends Horde_Group_Base
             if (!empty($this->_params['attrisdn'])) {
                 $user =  $this->_ldap->findUserDN($user);
             }
-            $filter = Horde_Ldap_Filter::create($this->_params['memberuid'],
-                                                'equals', $user);
-            $filter = Horde_Ldap_Filter::combine('and', array($this->_filter, $filter));
-            $search = $this->_ldap->search($this->_params['basedn'], $filter,
-                                           array($attr));
+            $filter = Horde_Ldap_Filter::create(
+                $this->_params['memberuid'],
+                'equals',
+                $user
+            );
+            $filter = Horde_Ldap_Filter::combine('and', [$this->_filter, $filter]);
+            $search = $this->_ldap->search(
+                $this->_params['basedn'],
+                $filter,
+                [$attr]
+            );
         } catch (Horde_Ldap_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
-        $entries = array();
-        foreach ($search->sortedAsArray(array($attr)) as $entry) {
+        $entries = [];
+        foreach ($search->sortedAsArray([$attr]) as $entry) {
             $entries[$entry['dn']] = $entry[$attr][0];
         }
         return $entries;
@@ -427,8 +438,8 @@ class Horde_Group_Ldap extends Horde_Group_Base
             if (!empty($this->_params['attrisdn'])) {
                 $user =  $this->_ldap->findUserDN($user);
             }
-            $entry = $this->_ldap->getEntry($gid, array($attr));
-            $entry->add(array($attr => $user));
+            $entry = $this->_ldap->getEntry($gid, [$attr]);
+            $entry->add([$attr => $user]);
             $this->_rebind(true);
             $entry->update();
             $this->_rebind(false);
@@ -457,8 +468,8 @@ class Horde_Group_Ldap extends Horde_Group_Base
             if (!empty($this->_params['attrisdn'])) {
                 $user =  $this->_ldap->findUserDN($user);
             }
-            $entry = $this->_ldap->getEntry($gid, array($attr));
-            $entry->delete(array($attr => $user));
+            $entry = $this->_ldap->getEntry($gid, [$attr]);
+            $entry->delete([$attr => $user]);
             $this->_rebind(true);
             $entry->update();
             $this->_rebind(false);
@@ -483,12 +494,13 @@ class Horde_Group_Ldap extends Horde_Group_Base
             $result = $this->_ldap->search(
                 $this->_params['basedn'],
                 Horde_Ldap_Filter::create($attr, 'contains', $name),
-                array($attr));
+                [$attr]
+            );
         } catch (Horde_Ldap_Exception $e) {
             throw new Horde_Group_Exception($e);
         }
-        $entries = array();
-        foreach ($result->sortedAsArray(array($attr)) as $entry) {
+        $entries = [];
+        foreach ($result->sortedAsArray([$attr]) as $entry) {
             $entries[$entry['dn']] = $entry[$attr][0];
         }
         return $entries;
@@ -508,7 +520,8 @@ class Horde_Group_Ldap extends Horde_Group_Base
             $search = $this->_ldap->search(
                 $this->_params['basedn'],
                 $this->_filter,
-                array('attributes' => array('gidnumber')));
+                ['attributes' => ['gidnumber']]
+            );
         } catch (Horde_Ldap_Exception $e) {
             throw new Horde_Group_Exception($e);
         }

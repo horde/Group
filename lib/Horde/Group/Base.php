@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 1999-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 1999-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
@@ -41,7 +41,7 @@ abstract class Horde_Group_Base
     /**
      * Constructor.
      */
-    public function __construct($params = array())
+    public function __construct($params = [])
     {
         if (isset($params['cache'])) {
             $this->_cache = $params['cache'];
@@ -117,7 +117,7 @@ abstract class Horde_Group_Base
             $this->_cache->set($this->_sig('exists_' . $gid), 1);
             $this->_cache->set(
                 $this->_sig('data_' . $gid),
-                serialize(array('name' => $name, 'email' => $email))
+                serialize(['name' => $name, 'email' => $email])
             );
         } catch (Horde_Cache_Exception $e) {
         }
@@ -234,8 +234,8 @@ abstract class Horde_Group_Base
     public function exists($gid)
     {
         // Check list cache.
-        if ((($list = $this->_getListCache()) !== null) &&
-            isset($list[$gid])) {
+        if ((($list = $this->_getListCache()) !== null)
+            && isset($list[$gid])) {
             return true;
         }
 
@@ -249,7 +249,7 @@ abstract class Horde_Group_Base
 
         // Update "exists" cache.
         try {
-            $this->_cache->set($this->_sig('exists_' . $gid), (int)$exists);
+            $this->_cache->set($this->_sig('exists_' . $gid), (int) $exists);
         } catch (Horde_Cache_Exception $e) {
         }
 
@@ -269,7 +269,7 @@ abstract class Horde_Group_Base
             // Cache stores 0 (doesn't exist) or 1 (exists) as int or string.
             // false/null means no cached value.
             if ($exists !== false && $exists !== null) {
-                return (bool)$exists;
+                return (bool) $exists;
             }
         } catch (Horde_Cache_Exception $e) {
             // Shouldn't there be at least some optional logging?
@@ -356,8 +356,8 @@ abstract class Horde_Group_Base
     public function getData($gid)
     {
         // Check list cache.
-        if (($list = $this->_getListCache()) !== null &&
-            !isset($list[$gid])) {
+        if (($list = $this->_getListCache()) !== null
+            && !isset($list[$gid])) {
             throw new Horde_Exception_NotFound();
         }
 
@@ -421,7 +421,7 @@ abstract class Horde_Group_Base
             if ($data = $this->_cache->get($sig, 0)) {
                 $data = @unserialize($data);
             } else {
-                $data = array();
+                $data = [];
             }
         } catch (Horde_Cache_Exception $e) {
         }

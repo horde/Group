@@ -1,6 +1,12 @@
 <?php
+
+declare(strict_types=1);
+
 /**
- * Copyright 2011-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 The Horde Project (http://www.horde.org/)
+ *
+ * See the enclosed file LICENSE for license information (LGPL). If you
+ * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  *
  * @author     Jan Schneider <jan@horde.org>
  * @category   Horde
@@ -8,24 +14,26 @@
  * @subpackage UnitTests
  * @license    http://www.horde.org/licenses/lgpl21 LGPL 2.1
  */
+
 class Horde_Group_Stub_Api
 {
-    protected $_groups = array(
-        'localsql:79ad3f08f267d15056650ee642a90b82' => array(
+    protected $_groups = [
+        'localsql:79ad3f08f267d15056650ee642a90b82' => [
             'id' => '79ad3f08f267d15056650ee642a90b82',
             'members' => 'a:1:{i:0;s:3:"joe";}',
             'email' => 'me@example.com',
-            'name' => 'My Group'),
-        'localsql:f44d8744352d9d3b6a5a1a72831e4cf4' => array(
+            'name' => 'My Group'],
+        'localsql:f44d8744352d9d3b6a5a1a72831e4cf4' => [
             'id' => 'f44d8744352d9d3b6a5a1a72831e4cf4',
             'members' => 'a:2:{i:0;s:3:"joe";i:1;s:4:"jane";}',
             'email' => null,
-            'name' => 'My Other Group'),
-        'localsql:43959c113d25605fbce585a46ff495d6' => array(
+            'name' => 'My Other Group'],
+        'localsql:43959c113d25605fbce585a46ff495d6' => [
             'id' => '43959c113d25605fbce585a46ff495d6',
             'members' => 'b:0;',
             'email' => null,
-            'name' => 'Not My Group'));
+            'name' => 'Not My Group'],
+    ];
 
     /**
      * Returns all contact groups.
@@ -33,7 +41,7 @@ class Horde_Group_Stub_Api
      * @return array  A list of group hashes.
      * @throws Horde_Exception
      */
-    public function getGroupObjects()
+    public function getGroupObjects(): array
     {
         return $this->_groups;
     }
@@ -49,9 +57,9 @@ class Horde_Group_Stub_Api
      *                member of.
      * @throws Horde_Exception
      */
-    public function getGroupMemberships($user, $parentGroups = false)
+    public function getGroupMemberships(string $user, bool $parentGroups = false): array
     {
-        $groups = array();
+        $groups = [];
         foreach ($this->_groups as $id => $group) {
             $members = unserialize($group['members']);
             if (is_array($members) && in_array($user, $members)) {
@@ -69,10 +77,10 @@ class Horde_Group_Stub_Api
      * @return array  A hash defining the group.
      * @throws Horde_Exception
      */
-    public function getGroupObject($gid)
+    public function getGroupObject(string $gid): array
     {
         if (!isset($this->_groups[$gid])) {
-            return array();
+            return [];
         }
         $group = $this->_groups[$gid];
         unset($group['id']);
@@ -88,10 +96,10 @@ class Horde_Group_Stub_Api
      * @return array An array of group members (identified by email address).
      * @throws Horde_Exception
      */
-    public function getGroupMembers($gid, $subGroups = false)
+    public function getGroupMembers(string $gid, bool $subGroups = false): array
     {
         if (!isset($this->_groups[$gid])) {
-            return array();
+            return [];
         }
         return unserialize($this->_groups[$gid]['members']);
     }
