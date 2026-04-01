@@ -264,11 +264,11 @@ abstract class Horde_Group_Base
      */
     protected function _checkExistsCache($gid)
     {
-        // Use strlen() to catch "0" and "1".
         try {
             $exists = $this->_cache->get($this->_sig('exists_' . $gid), 0);
-            if (is_string($exists) && strlen($exists)) {
-                // true or false if the cache knows
+            // Cache stores 0 (doesn't exist) or 1 (exists) as int or string.
+            // false/null means no cached value.
+            if ($exists !== false && $exists !== null) {
                 return (bool)$exists;
             }
         } catch (Horde_Cache_Exception $e) {
