@@ -1,7 +1,7 @@
 ---
 id: Group
 name: Group
-full: User groups library
+full: User groups library supporting many backend types.
 description: A library for managing and accessing user group systems.
 list: dev
 type: library
@@ -20,10 +20,10 @@ authors:
     active: false
     role: lead
 version:
-  release: 3.0.0-alpha6
+  release: 3.0.0-beta1
   api: 3.0.0alpha1
 state:
-  release: alpha
+  release: beta
   api: alpha
 license:
   identifier: LGPL-2.1-only
@@ -40,4 +40,8 @@ dependencies:
       horde/cache: ^3
       horde/db: ^3
       horde/ldap: ^3
-      horde/test: ^3
+keywords:
+  - sql
+  - posix
+  - ldap
+vendor: horde

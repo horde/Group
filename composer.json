@@ -1,7 +1,7 @@
 {
     "name": "horde/group",
-    "description": "User groups library",
-    "type": "library",
+    "description": "User groups library supporting many backend types.",
+    "type": "horde-library",
     "homepage": "https://www.horde.org/libraries/Horde_Group",
     "license": "LGPL-2.1-only",
     "authors": [
@@ -16,9 +16,15 @@
             "role": "lead"
         }
     ],
-    "time": "2025-05-29",
+    "keywords": [
+        "sql",
+        "posix",
+        "ldap"
+    ],
+    "time": "2026-04-01",
     "repositories": [],
     "require": {
+        "horde/horde-installer-plugin": "dev-FRAMEWORK_6_0 || ^3 || ^2",
         "php": "^7.4 || ^8",
         "horde/exception": "^3 || dev-FRAMEWORK_6_0",
         "horde/util": "^3 || dev-FRAMEWORK_6_0",
@@ -28,8 +34,7 @@
     "suggest": {
         "horde/cache": "^3 || dev-FRAMEWORK_6_0",
         "horde/db": "^3 || dev-FRAMEWORK_6_0",
-        "horde/ldap": "^3 || dev-FRAMEWORK_6_0",
-        "horde/test": "^3 || dev-FRAMEWORK_6_0"
+        "horde/ldap": "^3 || dev-FRAMEWORK_6_0"
     },
     "autoload": {
         "psr-0": {
@@ -42,7 +47,9 @@
         }
     },
     "config": {
-        "allow-plugins": {}
+        "allow-plugins": {
+            "horde/horde-installer-plugin": true
+        }
     },
     "extra": {
         "branch-alias": {

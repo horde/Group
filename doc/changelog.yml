@@ -1,4 +1,17 @@
 ---
+3.0.0-beta1:
+  api: 3.0.0-beta1
+  state:
+    release: beta
+    api: beta
+  date: 2026-04-01
+  license:
+    identifier: LGPL-2.1-only
+    uri: https://spdx.org/licenses/LGPL-2.1-only.html
+  notes: |-
+    test: Upgrade test suite and cover regression #3
+    fix: Group cache issue for backends with integer keys #3
+    feat!: Remove the Kolab group type
 3.0.0-alpha6:
   api: 3.0.0-alpha1
   state:
