@@ -369,8 +369,8 @@ class Horde_Group_Ldap extends Horde_Group_Base
                 // contains the user ID.
                 $user = $dn[0];
                 // Check for multi-value RDNs.
-                if (is_array($element)) {
-                    $user = $element[0];
+                if (is_array($user)) {
+                    $user = $user[0];
                 }
                 $users[] = $user;
             }
