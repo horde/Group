@@ -322,7 +322,9 @@ class Horde_Group_Ldap extends Horde_Group_Base
 
         $entries = [];
         foreach ($search->sortedAsArray([$attr]) as $entry) {
-            $entries[$entry['dn']] = $entry[$attr][0];
+            if (isset($entry[$attr][0])) {
+                $entries[$entry['dn']] = $entry[$attr][0];
+            }
         }
         return $entries;
     }
@@ -413,7 +415,9 @@ class Horde_Group_Ldap extends Horde_Group_Base
         }
         $entries = [];
         foreach ($search->sortedAsArray([$attr]) as $entry) {
-            $entries[$entry['dn']] = $entry[$attr][0];
+            if (isset($entry[$attr][0])) {
+                $entries[$entry['dn']] = $entry[$attr][0];
+            }
         }
         return $entries;
     }
@@ -501,7 +505,9 @@ class Horde_Group_Ldap extends Horde_Group_Base
         }
         $entries = [];
         foreach ($result->sortedAsArray([$attr]) as $entry) {
-            $entries[$entry['dn']] = $entry[$attr][0];
+            if (isset($entry[$attr][0])) {
+                $entries[$entry['dn']] = $entry[$attr][0];
+            }
         }
         return $entries;
     }
