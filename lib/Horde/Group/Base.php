@@ -22,7 +22,7 @@
  * @license   http://www.horde.org/licenses/lgpl21 LGPL 2.1
  * @package   Group
  */
-abstract class Horde_Group_Base
+abstract class Horde_Group_Base implements Horde_Group
 {
     /** Cache prefix. */
     public const CACHE_PREFIX = 'horde_group_';
