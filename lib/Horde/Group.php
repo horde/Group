@@ -8,7 +8,7 @@
  * See the enclosed file LICENSE for license information (LGPL). If you
  * did not receive this file, see http://www.horde.org/licenses/lgpl21.
  *
- * This should actually be something like Horde_Group_Driver or Horde_Group_Api but existing type hints bind against 
+ * This should actually be something like Horde_Group_Driver or Horde_Group_Api but existing type hints bind against
  * a non-existing Horde_Group so we fill that gap and rename when upgrading to a PSR-4 API
  *
  * @author    Jan Schneider <jan@horde.org>

@@ -21,6 +21,7 @@ use PHPUnit\Framework\Attributes\{CoversClass, Depends};
 use Horde_Util;
 use Horde_Group_File;
 use Horde_Group_Base;
+use Horde\Util\Util;
 
 /**
  * @coversNothing
@@ -73,7 +74,7 @@ class FileTest extends TestBase
 
     public function testGroupWithUmlaut(): void
     {
-        $filename = Horde_Util::getTempFile('Horde_Group_FileTest');
+        $filename = Util::getTempFile('Horde_Group_FileTest');
 
         $group_name = 'Group with Umläut';
         $user_name = 'joe';
@@ -106,7 +107,7 @@ class FileTest extends TestBase
 
     public static function setUpBeforeClass(): void
     {
-        self::$_groupfile = Horde_Util::getTempFile('Horde_Group_FileTest');
+        self::$_groupfile = Util::getTempFile('Horde_Group_FileTest');
 
         $fp = fopen(self::$_groupfile, 'w');
         fwrite($fp, "My Group:x:1:joe\n");
