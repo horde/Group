@@ -1,4 +1,14 @@
 ---
+3.0.0:
+  api: 3.0.0
+  state:
+    release: stable
+    api: stable
+  date: 2026-06-27
+  license:
+    identifier: LGPL-2.1-only
+    uri: https://spdx.org/licenses/LGPL-2.1-only.html
+  notes: "chore: refresh qc fixes and platform deps\nchore: Update workflow dependency"
 3.0.0-beta2:
   api: 3.0.0-beta2
   state:
@@ -8,10 +18,7 @@
   license:
     identifier: LGPL-2.1-only
     uri: https://spdx.org/licenses/LGPL-2.1-only.html
-  notes: |-
-    feat: Add an interface Horde_Group to Horde_Group_Base
-    fix(ldap): guard sortedAsArray attribute access with isset() for PHP 8.0+
-    fix: wrong variable name
+  notes: "feat: Add an interface Horde_Group to Horde_Group_Base\nfix(ldap): guard sortedAsArray attribute access with isset() for PHP 8.0+\nfix: wrong variable name"
 3.0.0-beta1:
   api: 3.0.0-beta1
   state:
@@ -21,10 +28,7 @@
   license:
     identifier: LGPL-2.1-only
     uri: https://spdx.org/licenses/LGPL-2.1-only.html
-  notes: |-
-    test: Upgrade test suite and cover regression #3
-    fix: Group cache issue for backends with integer keys #3
-    feat!: Remove the Kolab group type
+  notes: "test: Upgrade test suite and cover regression #3\nfix: Group cache issue for backends with integer keys #3\nfeat!: Remove the Kolab group type"
 3.0.0-alpha6:
   api: 3.0.0-alpha1
   state:
@@ -34,8 +38,7 @@
   license:
     identifier: LGPL-2.1-only
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    fix: Explicitly send null if the cache has no record if a group is present (true) or not (false) and document.
+  notes: "fix: Explicitly send null if the cache has no record if a group is present (true) or not (false) and document.\n"
 3.0.0-alpha5:
   api: 3.0.0-alpha1
   state:
@@ -45,9 +48,7 @@
   license:
     identifier: LGPL-2.1-only
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    fix: Guard against passing false to strlen
-    fix: E_STRICT is deprecated in php 8.4
+  notes: "fix: Guard against passing false to strlen\nfix: E_STRICT is deprecated in php 8.4\n"
 3.0.0-alpha4:
   api: 3.0.0alpha1
   state:
@@ -57,10 +58,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 3.0.0alpha4
-    [rla] Release for PHP 8.
-    |+
+  notes: "Original version string was 3.0.0alpha4\n[rla] Release for PHP 8.\n|+\n"
 3.0.0-alpha3:
   api: 3.0.0alpha1
   state:
@@ -70,9 +68,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |-
-    Original version string was 3.0.0alpha3
-    |+
+  notes: "Original version string was 3.0.0alpha3\n|+"
 3.0.0-alpha2:
   api: 3.0.0alpha1
   state:
@@ -82,9 +78,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |-
-    Original version string was 3.0.0alpha2
-    |+
+  notes: "Original version string was 3.0.0alpha2\n|+"
 3.0.0-alpha1:
   api: 3.0.0alpha1
   state:
@@ -94,10 +88,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |+
-    Original version string was 3.0.0alpha1
-    [jan] Add read-only File driver for (shadow) group file backends.
-    
+  notes: "Original version string was 3.0.0alpha1\n[jan] Add read-only File driver for (shadow) group file backends.\n\n"
 2.1.1:
   api: 1.1.0
   state:
@@ -107,8 +98,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Mark PHP 7 as supported.
+  notes: "[jan] Mark PHP 7 as supported.\n"
 2.1.0:
   api: 1.1.0
   state:
@@ -118,8 +108,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Add caching support.
+  notes: "[jan] Add caching support.\n"
 2.0.5:
   api: 1.0.0
   state:
@@ -129,9 +118,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Add schema definition for LDAP groups.
-    [jan] Don't throw exception from listUsers() if group not found in LDAP directory (Bug #13879).
+  notes: "[jan] Add schema definition for LDAP groups.\n[jan] Don't throw exception from listUsers() if group not found in LDAP directory (Bug #13879).\n"
 2.0.4:
   api: 1.0.0
   state:
@@ -141,8 +128,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Check for read-only LDAP configurations in removeUser() (skhorde@smail.inf.fh-bonn-rhein-sieg.de, Bug #13247).
+  notes: "[jan] Check for read-only LDAP configurations in removeUser() (skhorde@smail.inf.fh-bonn-rhein-sieg.de, Bug #13247).\n"
 2.0.3:
   api: 1.0.0
   state:
@@ -152,8 +138,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Make SQL backend compatible with Oracle.
+  notes: "[jan] Make SQL backend compatible with Oracle.\n"
 2.0.2:
   api: 1.0.0
   state:
@@ -163,8 +148,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Improve unit tests.
+  notes: "[jan] Improve unit tests.\n"
 2.0.1:
   api: 1.0.0
   state:
@@ -174,33 +158,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [mms] Use new Horde_Test layout.
-2.0.0-beta1:
-  api: 1.0.0
-  state:
-    release: beta
-    api: stable
-  date: 2012-07-19
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 2.0.0beta1
-    First beta release for Horde 5.
-2.0.0-alpha1:
-  api: 1.0.0
-  state:
-    release: alpha
-    api: stable
-  date: 2012-07-05
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 2.0.0alpha1
-    First alpha release for Horde 5.
-    [mms] Remove Contactlists driver.
+  notes: "[mms] Use new Horde_Test layout.\n"
 2.0.0:
   api: 1.0.0
   state:
@@ -210,8 +168,27 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    First stable release for Horde 5.
+  notes: "First stable release for Horde 5.\n"
+2.0.0-beta1:
+  api: 1.0.0
+  state:
+    release: beta
+    api: stable
+  date: 2012-07-19
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "Original version string was 2.0.0beta1\nFirst beta release for Horde 5.\n"
+2.0.0-alpha1:
+  api: 1.0.0
+  state:
+    release: alpha
+    api: stable
+  date: 2012-07-05
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "Original version string was 2.0.0alpha1\nFirst alpha release for Horde 5.\n[mms] Remove Contactlists driver.\n"
 1.0.5:
   api: 1.0.0
   state:
@@ -221,8 +198,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Use configured filter when listing groups (Jesse Sandberg <jesse.sandberg@verkkokauppa.com>, Bug #10975).
+  notes: "[jan] Use configured filter when listing groups (Jesse Sandberg <jesse.sandberg@verkkokauppa.com>, Bug #10975).\n"
 1.0.4:
   api: 1.0.0
   state:
@@ -232,8 +208,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Allow to run unit tests from installed package.
+  notes: "[jan] Allow to run unit tests from installed package.\n"
 1.0.3:
   api: 1.0.0
   state:
@@ -243,8 +218,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Fix bind for modifying existing LDAP groups.
+  notes: "[jan] Fix bind for modifying existing LDAP groups.\n"
 1.0.2:
   api: 1.0.0
   state:
@@ -254,8 +228,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Fix undefined method when using attrisdn in LDAP driver.
+  notes: "[jan] Fix undefined method when using attrisdn in LDAP driver.\n"
 1.0.1:
   api: 1.0.0
   state:
@@ -265,59 +238,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    [jan] Add support for the attrisdn configuration setting (Bug #9762).
-1.0.0-beta1:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-16
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 1.0.0beta1
-    Fix error in Mock driver when listing groups (Bug #9642).
-1.0.0-alpha1:
-  api: 1.0.0
-  state:
-    release: alpha
-    api: alpha
-  date: 2011-03-08
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 1.0.0alpha1
-    First alpha release for Horde 4.
-    Throw exceptions, not PEAR_Errors.
-1.0.0-RC2:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-29
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 1.0.0RC2
-    Second release candidate for Horde 4.
-    [jan] Fix incorrect lowercasing of objectClasses in LDAP driver.
-    [jan] Fix building LDAP filter from configuration (Bug #9739).
-1.0.0-RC1:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-22
-  license:
-    identifier: LGPL-2.1
-    uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Original version string was 1.0.0RC1
-    First release candidate for Horde 4.
+  notes: "[jan] Add support for the attrisdn configuration setting (Bug #9762).\n"
 1.0.0:
   api: 1.0.0
   state:
@@ -327,9 +248,47 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    First stable release for Horde 4.
-    [jan] Add parameter to listAll() to only return groups that a user is member of.
+  notes: "First stable release for Horde 4.\n[jan] Add parameter to listAll() to only return groups that a user is member of.\n"
+1.0.0-RC2:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-29
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "Original version string was 1.0.0RC2\nSecond release candidate for Horde 4.\n[jan] Fix incorrect lowercasing of objectClasses in LDAP driver.\n[jan] Fix building LDAP filter from configuration (Bug #9739).\n"
+1.0.0-RC1:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-22
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "Original version string was 1.0.0RC1\nFirst release candidate for Horde 4.\n"
+1.0.0-beta1:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-16
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "Original version string was 1.0.0beta1\nFix error in Mock driver when listing groups (Bug #9642).\n"
+1.0.0-alpha1:
+  api: 1.0.0
+  state:
+    release: alpha
+    api: alpha
+  date: 2011-03-08
+  license:
+    identifier: LGPL-2.1
+    uri: http://www.horde.org/licenses/lgpl21
+  notes: "Original version string was 1.0.0alpha1\nFirst alpha release for Horde 4.\nThrow exceptions, not PEAR_Errors.\n"
 0.1.0:
   api: 0.1.0
   state:
@@ -339,21 +298,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Added a mock driver for installations that don't need groups (Request #6157).
-    Added a beta SQL Group driver (Request #6175).
-    Removed unused renameGroup() function.
-    Fixed loading subclasses before unserializing session objects (Bug #4650)
-    Added caching.
-    Fixed getGroupParents().
-    Fixed listAllUsers().
-    Switched from hook functions for every group to a single hook function for all groups (Request #4324).
-    Added a Group driver for the Kolab groupware server.
-    Allow group members to be stored as DNs in LDAP driver (Bug #4131).
-    Significant changes to the LDAP Group driver (Bug #4135).
-    Fixed chicken and egg problem for creating the first LDAP group (Bug #4668).
-    Fixed nextgid calculation in the LDAP driver (Bug #4699).
-    UTF-8-encoded DNs in the LDAP Groups driver (Bugs #4692 and #4918).
+  notes: "Added a mock driver for installations that don't need groups (Request #6157).\nAdded a beta SQL Group driver (Request #6175).\nRemoved unused renameGroup() function.\nFixed loading subclasses before unserializing session objects (Bug #4650)\nAdded caching.\nFixed getGroupParents().\nFixed listAllUsers().\nSwitched from hook functions for every group to a single hook function for all groups (Request #4324).\nAdded a Group driver for the Kolab groupware server.\nAllow group members to be stored as DNs in LDAP driver (Bug #4131).\nSignificant changes to the LDAP Group driver (Bug #4135).\nFixed chicken and egg problem for creating the first LDAP group (Bug #4668).\nFixed nextgid calculation in the LDAP driver (Bug #4699).\nUTF-8-encoded DNs in the LDAP Groups driver (Bugs #4692 and #4918).\n"
 0.0.2:
   api: 0.0.2
   state:
@@ -363,9 +308,7 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Added ldap driver.
-    Converted to package.xml 2.0 for pear.horde.org.
+  notes: "Added ldap driver.\nConverted to package.xml 2.0 for pear.horde.org.\n"
 0.0.1:
   api: 0.0.1
   state:
@@ -375,5 +318,4 @@
   license:
     identifier: LGPL-2.1
     uri: http://www.horde.org/licenses/lgpl21
-  notes: |
-    Initial release as a PEAR package
+  notes: "Initial release as a PEAR package\n"

@@ -21,7 +21,7 @@
         "posix",
         "ldap"
     ],
-    "time": "2026-04-17",
+    "time": "2026-06-27",
     "repositories": [],
     "require": {
         "horde/horde-installer-plugin": "dev-FRAMEWORK_6_0 || ^3 || ^2",
